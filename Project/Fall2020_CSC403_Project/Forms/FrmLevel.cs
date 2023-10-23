@@ -72,9 +72,6 @@ namespace Fall2020_CSC403_Project {
         return new Collider(rect);
     }
 
-        private void FrmLevel_KeyUp(object sender, KeyEventArgs e) {
-      player.ResetMoveSpeed();
-    }
 
     private void tmrUpdateInGameTime_Tick(object sender, EventArgs e) {
       TimeSpan span = DateTime.Now - timeBegin;
@@ -182,5 +179,6 @@ namespace Fall2020_CSC403_Project {
 
         private void lblInGameTime_Click(object sender, EventArgs e) {
 
-    }
+      }
+  }
 }
