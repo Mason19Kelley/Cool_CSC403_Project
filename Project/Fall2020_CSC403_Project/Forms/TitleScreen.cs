@@ -22,6 +22,7 @@ namespace Fall2020_CSC403_Project
             InitializeComponent();
             InitializeFonts();
             InitializeUI();
+            MusicPlayer.InitializeSounds();
             MusicPlayer.PlayTitleSound();
             this.SizeChanged += TitleScreen_SizeChanged;
         }
@@ -31,6 +32,7 @@ namespace Fall2020_CSC403_Project
             PrivateFontCollection pfc = new PrivateFontCollection();
             pfc.AddFontFile("./Fonts/pixelated.ttf");
             titleFont = pfc.Families[0];
+            Console.WriteLine(titleFont.Name);
         }
 
         private void InitializeUI()
@@ -48,7 +50,7 @@ namespace Fall2020_CSC403_Project
             float fontSize = this.ClientSize.Width / 12;
             FontStyle fontStyle = FontStyle.Regular;
 
-            titleFontStyle = new Font(titleFont, fontSize, fontStyle);
+            titleFontStyle = new Font(titleFont, fontSize, fontStyle);  
             label1.Font = titleFontStyle;
         }
 

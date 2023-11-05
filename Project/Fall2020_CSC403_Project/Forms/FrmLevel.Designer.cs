@@ -40,10 +40,10 @@ namespace Fall2020_CSC403_Project {
             this.picWall2 = new System.Windows.Forms.PictureBox();
             this.picWall11 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.mainCharacter = new System.Windows.Forms.PictureBox();
             this.picGun = new System.Windows.Forms.PictureBox();
@@ -64,6 +64,7 @@ namespace Fall2020_CSC403_Project {
             ((System.ComponentModel.ISupportInitialize)(this.picWall2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainCharacter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGun)).BeginInit();
             this.SuspendLayout();
@@ -135,7 +136,6 @@ namespace Fall2020_CSC403_Project {
             this.picBossKoolAid.Size = new System.Drawing.Size(193, 194);
             this.picBossKoolAid.TabIndex = 1;
             this.picBossKoolAid.TabStop = false;
-
             // 
             // picWall5
             // 
@@ -273,10 +273,10 @@ namespace Fall2020_CSC403_Project {
             // 
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.richTextBox1);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -284,6 +284,17 @@ namespace Fall2020_CSC403_Project {
             this.panel1.Size = new System.Drawing.Size(1176, 726);
             this.panel1.TabIndex = 18;
             this.panel1.Visible = false;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.trackBar1.Location = new System.Drawing.Point(346, 344);
+            this.trackBar1.Maximum = 2;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(483, 45);
+            this.trackBar1.TabIndex = 5;
+            this.trackBar1.Value = 2;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // richTextBox1
             // 
@@ -324,32 +335,13 @@ namespace Fall2020_CSC403_Project {
             this.button3.FlatAppearance.BorderSize = 100;
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Magenta;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button3.Location = new System.Drawing.Point(520, 349);
+            this.button3.Location = new System.Drawing.Point(520, 243);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(136, 56);
             this.button3.TabIndex = 2;
             this.button3.Text = "Quit game";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.exit_Click);
-            // 
-            // button2
-            // 
-            this.button2.AutoSize = true;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.button2.FlatAppearance.BorderSize = 100;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Magenta;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button2.Location = new System.Drawing.Point(520, 243);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 56);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Full Screen";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.fullScreen);
             // 
             // button1
             // 
@@ -368,13 +360,14 @@ namespace Fall2020_CSC403_Project {
             this.button1.Text = "Controls";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.showControls);
+            // 
             // mainCharacter
             // 
             this.mainCharacter.BackColor = System.Drawing.Color.Transparent;
             this.mainCharacter.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.player;
             this.mainCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mainCharacter.Location = new System.Drawing.Point(120, 495);
-            this.mainCharacter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mainCharacter.Margin = new System.Windows.Forms.Padding(2);
             this.mainCharacter.Name = "mainCharacter";
             this.mainCharacter.Size = new System.Drawing.Size(64, 107);
             this.mainCharacter.TabIndex = 18;
@@ -395,10 +388,10 @@ namespace Fall2020_CSC403_Project {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.panel1);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1176, 726);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainCharacter);
             this.Controls.Add(this.picWall11);
             this.Controls.Add(this.picWall2);
@@ -443,6 +436,7 @@ namespace Fall2020_CSC403_Project {
             ((System.ComponentModel.ISupportInitialize)(this.picWall11)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainCharacter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGun)).EndInit();
             this.ResumeLayout(false);
@@ -474,11 +468,11 @@ namespace Fall2020_CSC403_Project {
     private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.RichTextBox richTextBox1;
     private System.Windows.Forms.PictureBox mainCharacter;
         private System.Windows.Forms.PictureBox picGun;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 

@@ -62,6 +62,7 @@ namespace Fall2020_CSC403_Project
             }
 
             /*this.Transparent_images_Click();*/
+            MusicPlayer.InitializeSounds();
             MusicPlayer.PlayLevelMusic();
             Game.player = player;
             timeBegin = DateTime.Now;
@@ -261,8 +262,7 @@ namespace Fall2020_CSC403_Project
         private void ShowOverlay()
         {
             button1.Location = new Point(520, 137);
-            button2.Location = new Point(520, 243);
-            button3.Location = new Point(520, 349);
+            button3.Location = new Point(520, 243);
 
             panel1.Visible = true;
             richTextBox1.Visible = false;
@@ -310,14 +310,12 @@ namespace Fall2020_CSC403_Project
             if (button1.Location.X > 200)
             {
                 button1.Left -= 400;
-                button2.Left -= 400;
                 button3.Left -= 400;
                 richTextBox1.Visible = true;
             }
             else
             {
                 button1.Left += 400;
-                button2.Left += 400;
                 button3.Left += 400;
                 richTextBox1.Visible = false;
             }
@@ -356,6 +354,27 @@ namespace Fall2020_CSC403_Project
         private void lblInGameTime_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            float volume;
+            int tickValue = trackBar1.Value;
+            if(tickValue == 0)
+            {
+                volume = 0.1f;
+                MusicPlayer.ChangeLevelVolume(volume);
+            }
+            if(tickValue == 1)
+            {
+                volume = 0.5f;
+                MusicPlayer.ChangeLevelVolume(volume);
+            }
+            if (tickValue == 2)
+            {
+                volume = 1f;
+                MusicPlayer.ChangeLevelVolume(volume);
+            }
         }
     }
 }

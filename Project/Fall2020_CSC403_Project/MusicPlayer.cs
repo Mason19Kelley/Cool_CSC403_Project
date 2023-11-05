@@ -7,53 +7,90 @@ using System.Net.NetworkInformation;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using NAudio.Wave;
 
 namespace MyGameLibrary
 {
     public class MusicPlayer
     {
-        private static SoundPlayer levelSound = new SoundPlayer(Resources.background);
-        private static SoundPlayer gameOverSound = new SoundPlayer(Resources.game_over);
-        private static SoundPlayer titleSound = new SoundPlayer(Resources.title);
-        private static SoundPlayer battleSound = new SoundPlayer(Resources.battle);
-        private static SoundPlayer bossBattleSound = new SoundPlayer(Resources.boss_battle);
+
+        private static BlockAlignReductionStream gameOverSound;
+        private static BlockAlignReductionStream levelSound;
+        private static BlockAlignReductionStream titleSound;
+        private static BlockAlignReductionStream battleSound;
+        private static BlockAlignReductionStream bossBattleSound;
+
+        private static WaveOut waveOut;
+
+        private static LoopedStream loopedtitleSound;
+        private static LoopedStream loopedbattleSound;
+        private static LoopedStream loopedlevelSound;
+        private static LoopedStream loopedgameOverSound;
+        private static LoopedStream loopedbossBattleSound;
+
+        public static void InitializeSounds()
+        {
+            waveOut = new WaveOut();
+
+            levelSound = new BlockAlignReductionStream(new AudioFileReader("../../Resources/669543__sintelv__jungle-level.wav"));
+            gameOverSound = new BlockAlignReductionStream(new AudioFileReader("../../Resources/365738__matrixxx__game-over-02.wav"));
+            titleSound = new BlockAlignReductionStream(new AudioFileReader("../../Resources/460432__jay_you__music-elevator.wav"));
+            battleSound = new BlockAlignReductionStream(new AudioFileReader("../../Resources/338817__sirkoto51__rpg-battle-loop-1.wav"));
+            bossBattleSound = new BlockAlignReductionStream(new AudioFileReader("../../Resources/352171__sirkoto51__boss-battle-loop-1.wav"));
+
+            loopedlevelSound = new LoopedStream(levelSound);
+            loopedgameOverSound = new LoopedStream(gameOverSound);
+            loopedtitleSound = new LoopedStream(titleSound);
+            loopedbattleSound = new LoopedStream(battleSound);
+            loopedbossBattleSound = new LoopedStream(bossBattleSound);
+            }
 
         public static void PlayLevelMusic()
         {
-            levelSound.PlayLooping();
+            waveOut.Init(loopedlevelSound);
+            waveOut.Play();
+        }
+
+        public static void ChangeLevelVolume(float volume)
+        {
+            var volumeProvider = new WaveChannel32(loopedlevelSound);
+            volumeProvider.Volume = volume;
+            waveOut.Init(volumeProvider);
+            waveOut.Play();
         }
 
         public static void StopLevelMusic()
         {
-            levelSound.Stop();
+            waveOut.Stop();
         }
 
         public static void PlayTitleSound()
         {
-            titleSound.PlayLooping();
+            waveOut.Init(loopedtitleSound);
+            waveOut.Play();
         }
 
         public static void StopTitleSound()
         {
-            titleSound.Stop();
+            waveOut.Stop();
         }
 
         public static void PlayGameOverSound()
         {
-            gameOverSound.Play();
+            waveOut.Init(loopedgameOverSound);
+            waveOut.Play();
         }
 
         public static void PlayBattleSound()
         {
-            battleSound.PlayLooping();
+            waveOut.Init(loopedbattleSound);
+            waveOut.Play();
         }
 
         public static void StopBattleSound()
         {
-            battleSound.Stop();
+            waveOut.Stop();
         }
-
-
 
     }
 
