@@ -28,10 +28,15 @@ namespace Fall2020_CSC403_Project
 
         private FrmInventory frmInventory;
 
+        private Character leftBarrier;
+        private Character rightBarrier;
+        private Character pipeCollider;
+
         private ConfirmQuit confirmQuit = null;
 
         private string[] keylog = new string[10];
         private int index = 0;
+        private BonusLevel bonusLevel;
 
         public FrmLevel()
         {
@@ -64,6 +69,8 @@ namespace Fall2020_CSC403_Project
             bossKoolaid.BossKoolAidBC();
             enemyPoisonPacket.PoisonBC();
             enemyCheeto.CheetoBC();
+            this.createPipeBarrier();
+            pipeCollider = new Character(CreatePosition(pipe), CreatePipeCollider(pipe, 100));
 
             inventory = new Inventory();
 
@@ -88,6 +95,14 @@ namespace Fall2020_CSC403_Project
         private Collider CreateCollider(PictureBox pic, int padding)
         {
             Rectangle rect = new Rectangle(pic.Location, new Size(pic.Size.Width - padding, pic.Size.Height - padding));
+            return new Collider(rect);
+        }
+
+        private Collider CreatePipeCollider(PictureBox pic, int padding)
+        {
+            int x = pic.Left + pic.Width / 2 - (pic.Size.Width - padding) / 2;
+            int y = pic.Top + pic.Height / 2 - (pic.Size.Height - padding) / 2;
+            Rectangle rect = new Rectangle(x, y, pic.Size.Width - padding, pic.Size.Height - padding);
             return new Collider(rect);
         }
 
@@ -140,6 +155,17 @@ namespace Fall2020_CSC403_Project
             if (HitAChar(player, bossKoolaid))
             {
                 Fight(bossKoolaid);
+            }
+
+            if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
+            {
+                // Handle collision, e.g., prevent the character from moving
+                player.MoveBack();
+            }
+
+            if(HitAChar(player, pipeCollider))
+            {
+                openBonusLevel();
             }
 
             // update player's picture box
@@ -284,6 +310,7 @@ namespace Fall2020_CSC403_Project
             button3.Location = new Point(520, 243);
             
             panel1.Visible = true;
+            panel1.BringToFront();
             richTextBox1.Visible = false;
         }
 
@@ -413,5 +440,39 @@ namespace Fall2020_CSC403_Project
         {
 
         }
+
+        private void createPipeBarrier()
+        {
+            PictureBox pic = Controls.Find("barrier", true)[0] as PictureBox;
+            pic.SendToBack();
+            leftBarrier = new Character(CreatePosition(pic), CreateWallCollider(pic, 0, mainCharacter.Size.Height));
+
+            PictureBox pic2 = Controls.Find("barrier2", true)[0] as PictureBox;
+            pic2.SendToBack();
+            rightBarrier = new Character(CreatePosition(pic2), CreateWallCollider(pic2, 0, mainCharacter.Size.Height));
+        }
+
+        private void openBonusLevel()
+        {
+            MusicPlayer.StopLevelMusic();
+            player.ResetMoveSpeed();
+            player.MoveBack();
+            if (bonusLevel == null || bonusLevel.IsDisposed)
+            {
+                bonusLevel = new BonusLevel();
+                bonusLevel.Show();
+
+            }
+            else
+            {
+                bonusLevel.BringToFront();
+            }
+            
+            bonusLevel.StartPosition = FormStartPosition.Manual;
+            bonusLevel.Location = this.Location;
+            bonusLevel.Size = this.Size;
+        }
+
+        
     }
 }

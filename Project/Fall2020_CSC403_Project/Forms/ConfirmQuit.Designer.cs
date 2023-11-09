@@ -37,9 +37,10 @@ namespace Fall2020_CSC403_Project.Forms
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(25, 165);
+            this.button1.Location = new System.Drawing.Point(33, 203);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 42);
+            this.button1.Size = new System.Drawing.Size(147, 52);
             this.button1.TabIndex = 0;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@ namespace Fall2020_CSC403_Project.Forms
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(197, 165);
+            this.button2.Location = new System.Drawing.Point(263, 203);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 42);
+            this.button2.Size = new System.Drawing.Size(147, 52);
             this.button2.TabIndex = 1;
             this.button2.Text = "Quit";
             this.button2.UseVisualStyleBackColor = true;
@@ -59,7 +61,8 @@ namespace Fall2020_CSC403_Project.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(73, 22);
+            this.label1.Location = new System.Drawing.Point(97, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 31);
             this.label1.TabIndex = 2;
@@ -67,14 +70,15 @@ namespace Fall2020_CSC403_Project.Forms
             // 
             // ConfirmQuit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 234);
+            this.ClientSize = new System.Drawing.Size(460, 288);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ConfirmQuit";
-            this.Text = "Form1";
+            this.Text = "Quit";
             this.ResumeLayout(false);
             this.PerformLayout();
 
