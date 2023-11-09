@@ -2,9 +2,11 @@
 using Fall2020_CSC403_Project.Forms;
 using MyGameLibrary;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Fall2020_CSC403_Project
@@ -27,6 +29,9 @@ namespace Fall2020_CSC403_Project
         private FrmInventory frmInventory;
 
         private ConfirmQuit confirmQuit = null;
+
+        private string[] keylog = new string[10];
+        private int index = 0;
 
         public FrmLevel()
         {
@@ -261,7 +266,6 @@ namespace Fall2020_CSC403_Project
                         else
                         {
                             this.CloseOverlay();
-                            Console.WriteLine("here");
                         }
                         break;
 
@@ -353,9 +357,38 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyUp(object sender, KeyEventArgs e)
         {
+            Keys key = e.KeyCode;
+            string keyPress = key.ToString();
+
+            if(index < 9)
+            {
+                keylog[index] = keyPress;
+                index ++;
+            }
+            else
+            {
+                keylog[index] = keyPress;
+                index = 0;
+
+            }
+
+            string[] KonamiCode = { "Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A" };
+
+            bool isMatch = keylog.SequenceEqual(KonamiCode);
+
+            if (isMatch)
+            {
+                Console.WriteLine("MATCH");
+            }
+            
+            string temp = "[" + string.Join(", ", keylog) + "]";
+
+            Console.WriteLine(temp);
+
             switch (e.KeyCode)
             {
                 case Keys.Left:
+
                     player.KeysPressed.Remove("left");
                     break;
 
