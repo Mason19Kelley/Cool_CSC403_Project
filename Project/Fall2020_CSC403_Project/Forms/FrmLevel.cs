@@ -34,7 +34,7 @@ namespace Fall2020_CSC403_Project
 
         private BonusLevel bonusLevel;
 
-        private DeathScreen deathScreen;
+        private DeathScreen deathScreen = DeathScreen.Instance;
 
 
         public FrmLevel()

@@ -13,9 +13,11 @@ namespace Fall2020_CSC403_Project
     public partial class DeathScreen : Form
     {
         private FrmLevel frmLevel;
+        public static DeathScreen Instance { get; private set; }
         public DeathScreen()
         {
             InitializeComponent();
+            Instance = this;
         }
 
         private void button1_Click(object sender, EventArgs e)
