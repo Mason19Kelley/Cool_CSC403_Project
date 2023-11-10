@@ -38,6 +38,9 @@
             this.lblHit = new System.Windows.Forms.Label();
             this.lblDamage = new System.Windows.Forms.Label();
             this.btnHeal = new System.Windows.Forms.Button();
+            this.ttpAttack = new System.Windows.Forms.ToolTip();
+            this.ttpHeavyAttack = new System.Windows.Forms.ToolTip();
+            this.ttpHeal = new System.Windows.Forms.ToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.picBossBattle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEnemy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
@@ -185,6 +188,12 @@
             this.btnHeal.Text = "Heal";
             this.btnHeal.UseVisualStyleBackColor = true;
             this.btnHeal.Click += new System.EventHandler(this.btnHeal_Click);
+            //
+            // tooltips for combat buttons
+            //
+            ttpAttack.SetToolTip(btnAttack, "Deal normal damage to the enemy.");
+            ttpHeavyAttack.SetToolTip(btnHeavyAttack, "Deal double damage to the enemy (requires gun).");
+            ttpHeal.SetToolTip(btnHeal, "Heal for 4 health (requires potion).");
             // 
             // FrmBattle
             // 
@@ -231,7 +240,9 @@
     
     private System.Windows.Forms.Button btnHeavyAttack;
     private System.Windows.Forms.Label lblDamage;
-
     private System.Windows.Forms.Button btnHeal;
+    private System.Windows.Forms.ToolTip ttpAttack;
+    private System.Windows.Forms.ToolTip ttpHeavyAttack;
+    private System.Windows.Forms.ToolTip ttpHeal;
     }
 }
