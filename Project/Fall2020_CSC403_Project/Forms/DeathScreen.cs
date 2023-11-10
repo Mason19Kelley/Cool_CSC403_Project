@@ -11,9 +11,10 @@ using System.Windows.Forms;
 namespace Fall2020_CSC403_Project
 {
     public partial class DeathScreen : Form
-    {
-        private FrmLevel frmLevel;
+    { 
         public static DeathScreen Instance { get; private set; }
+
+        private FrmLevel frmLevel = FrmLevel.Instance;
         public DeathScreen()
         {
             InitializeComponent();
@@ -27,7 +28,6 @@ namespace Fall2020_CSC403_Project
 
         private void DeathScreen_Load(object sender, EventArgs e)
         {
-            FrmLevel frmLevel = new FrmLevel();
             frmLevel.Visible = false;
         }
     }

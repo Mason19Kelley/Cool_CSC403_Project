@@ -36,11 +36,14 @@ namespace Fall2020_CSC403_Project
 
         private DeathScreen deathScreen = DeathScreen.Instance;
 
+        public static FrmLevel Instance { get; private set; }
+
 
         public FrmLevel()
         {
             InitializeComponent();
             this.KeyPreview = true;
+            Instance = this;
         }
 
         private void FrmLevel_Load(object sender, EventArgs e)
