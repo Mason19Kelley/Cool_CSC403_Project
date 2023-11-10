@@ -34,8 +34,12 @@ namespace Fall2020_CSC403_Project
 
         private ConfirmQuit confirmQuit = null;
 
-        private string[] keylog = new string[10];
-        private int index = 0;
+        private const int MaxInputHistory = 11;
+        private List<string> keylog = new List<string>();
+        private readonly string[] KonamiCode = { "Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A" };
+        private int currentPatternIndex = 0;
+
+
         private BonusLevel bonusLevel;
 
         public FrmLevel()
@@ -387,26 +391,8 @@ namespace Fall2020_CSC403_Project
             Keys key = e.KeyCode;
             string keyPress = key.ToString();
 
-            if(index < 9)
-            {
-                keylog[index] = keyPress;
-                index ++;
-            }
-            else
-            {
-                keylog[index] = keyPress;
-                index = 0;
-
-            }
-
-            string[] KonamiCode = { "Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A" };
-
-            bool isMatch = keylog.SequenceEqual(KonamiCode);
-
-            if (isMatch)
-            {
-                Console.WriteLine("MATCH");
-            }
+            RecordInput(keyPress);
+           
             
             string temp = "[" + string.Join(", ", keylog) + "]";
 
@@ -434,6 +420,47 @@ namespace Fall2020_CSC403_Project
 
         }
 
+        public void RecordInput(string input)
+        {
+            keylog.Add(input);
+            if(keylog.Count > MaxInputHistory)
+            {
+                keylog.RemoveAt(0);
+            }
+            CheckForCheatCode();
+        }
+        private void CheckForCheatCode()
+        {
+            // Compare the recent inputs with the cheat code pattern
+            int startIndex = Math.Max(0, keylog.Count - KonamiCode.Length);
+
+            for (int i = startIndex; i < keylog.Count; i++)
+            {
+                if (keylog[i] == KonamiCode[currentPatternIndex])
+                {
+                    currentPatternIndex++;
+
+                    if (currentPatternIndex == KonamiCode.Length)
+                    {
+                        Console.WriteLine("Cheat code activated!");
+                        pipe.Visible = true;
+                        // Add your cheat code logic here
+                        ResetPattern();
+                        break;
+                    }
+                }
+                else
+                {
+                    ResetPattern();
+                    break;
+                }
+            }
+        }
+
+        private void ResetPattern()
+        {
+            currentPatternIndex = 0;
+        }
 
 
         private void lblInGameTime_Click(object sender, EventArgs e)
