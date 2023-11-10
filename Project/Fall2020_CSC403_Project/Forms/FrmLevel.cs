@@ -34,10 +34,16 @@ namespace Fall2020_CSC403_Project
 
         private BonusLevel bonusLevel;
 
+        private DeathScreen deathScreen = DeathScreen.Instance;
+
+        public static FrmLevel Instance { get; private set; }
+
+
         public FrmLevel()
         {
             InitializeComponent();
             this.KeyPreview = true;
+            Instance = this;
         }
 
         private void FrmLevel_Load(object sender, EventArgs e)
@@ -130,42 +136,45 @@ namespace Fall2020_CSC403_Project
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
-            // move player
-            player.Move();
+            if (deathScreen == null)
+            {
+                // move player
+                player.Move();
 
-            // check collision with walls
-            if (HitAWall(player))
-            {
-                player.MoveBack();
-            }
+                // check collision with walls
+                if (HitAWall(player))
+                {
+                    player.MoveBack();
+                }
 
-            // check collision with enemies
-            if (HitAChar(player, enemyPoisonPacket))
-            {
-                Fight(enemyPoisonPacket);
-            }
-            else if (HitAChar(player, enemyCheeto))
-            {
-                Fight(enemyCheeto);
-            }
-            if (HitAChar(player, bossKoolaid))
-            {
-                Fight(bossKoolaid);
-            }
+                // check collision with enemies
+                if (HitAChar(player, enemyPoisonPacket))
+                {
+                    Fight(enemyPoisonPacket);
+                }
+                else if (HitAChar(player, enemyCheeto))
+                {
+                    Fight(enemyCheeto);
+                }
+                if (HitAChar(player, bossKoolaid))
+                {
+                    Fight(bossKoolaid);
+                }
 
-            if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
-            {
-                // Handle collision, e.g., prevent the character from moving
-                player.MoveBack();
-            }
+                if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
+                {
+                    // Handle collision, e.g., prevent the character from moving
+                    player.MoveBack();
+                }
 
-            if(HitAChar(player, pipeCollider))
-            {
-                openBonusLevel();
-            }
+                if (HitAChar(player, pipeCollider))
+                {
+                    openBonusLevel();
+                }
 
-            // update player's picture box
-            mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+                // update player's picture box
+                mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+            }
         }
 
         private bool HitAWall(Character c)
