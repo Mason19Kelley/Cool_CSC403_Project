@@ -1,4 +1,5 @@
 ﻿using Fall2020_CSC403_Project.code;
+using Fall2020_CSC403_Project.Forms;
 using Fall2020_CSC403_Project.Properties;
 using MyGameLibrary;
 using System;
@@ -15,6 +16,7 @@ namespace Fall2020_CSC403_Project {
     private Player player;
     private Inventory inventory;
     Random atkchoice = new Random();
+    private DeathScreen deathScreen;
 
     private FrmBattle() {
       InitializeComponent();
@@ -114,8 +116,9 @@ namespace Fall2020_CSC403_Project {
       btnHeavyAttack.Enabled = true;
       if (player.Health <= 0) {
         MusicPlayer.StopBattleSound();
+        openDeathScreen();
 
-        if(player.Health <= 0 && enemy.Health > 0)
+                if (player.Health <= 0 && enemy.Health > 0)
         {
           MusicPlayer.StopLevelMusic();
           MusicPlayer.PlayGameOverSound();
@@ -170,6 +173,7 @@ namespace Fall2020_CSC403_Project {
       if (player.Health <= 0)
       {
         MusicPlayer.StopBattleSound();
+        openDeathScreen();
 
         if (player.Health <= 0 && enemy.Health > 0)
         {
@@ -289,6 +293,12 @@ namespace Fall2020_CSC403_Project {
 
             // Set the instance to null to allow a new instance to be created if needed
             instance = null;
+        }
+
+        private void openDeathScreen()
+        {
+            deathScreen = new DeathScreen();
+            deathScreen.Show();
         }
 
     }
