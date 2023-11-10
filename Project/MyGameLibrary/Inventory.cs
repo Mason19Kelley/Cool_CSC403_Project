@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Fall2020_CSC403_Project.code
 {
@@ -28,6 +29,21 @@ namespace Fall2020_CSC403_Project.code
             return items.Contains(item);
         }
 
+        // Check if the inventory contains an item with a specfic attribute
+        public bool ContainsAttribute(Inventory inventory, string attribute)
+        {
+            bool contains = false;
+            foreach (Item item in inventory.GetItems())
+            {
+                if(item.Attribute == attribute)
+                {
+                    contains = true;
+                    break;
+                }
+            }
+
+            return contains;
+        }
         // Get a list of all items in the inventory
         public List<Item> GetItems()
         {

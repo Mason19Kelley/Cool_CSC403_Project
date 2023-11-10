@@ -19,6 +19,7 @@ namespace Fall2020_CSC403_Project
         private Character[] walls;
 
         private Item gun;
+        private Item potion;
         private Inventory inventory;
 
         private DateTime timeBegin;
@@ -51,8 +52,10 @@ namespace Fall2020_CSC403_Project
             const int PADDING = 7;
             const int NUM_WALLS = 13;
 
-            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun");
+            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
+            potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
+            potion.Img = picPotion.BackgroundImage;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
@@ -217,7 +220,7 @@ namespace Fall2020_CSC403_Project
             MusicPlayer.StopLevelMusic();
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy);
+            frmBattle = FrmBattle.GetInstance(enemy, inventory);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
@@ -227,6 +230,21 @@ namespace Fall2020_CSC403_Project
 
 
 
+        }
+
+        private void PickUpItem(Character you)
+        {
+            if (HitAItem(you, gun))
+            {
+                inventory.AddItem(gun);
+                picGun.Dispose();
+                gun = null;
+            } else if (HitAItem(you, potion))
+            {
+                inventory.AddItem(potion);
+                picPotion.Dispose();
+                picPotion = null;
+            }
         }
 
         private void ShowInven() {
@@ -268,12 +286,7 @@ namespace Fall2020_CSC403_Project
                         break;
 
                     case Keys.E:
-                        if(HitAItem(player, gun))
-                        {
-                            inventory.AddItem(gun);
-                            picGun.Dispose();
-                            gun = null;
-                        }
+                        PickUpItem(player);
                     break;
                     
                     case Keys.I:
