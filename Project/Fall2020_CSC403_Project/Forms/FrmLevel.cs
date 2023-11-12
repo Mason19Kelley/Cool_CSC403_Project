@@ -92,12 +92,12 @@ namespace Fall2020_CSC403_Project
             timeBegin = DateTime.Now;
         }
 
-        private Vector2 CreatePosition(PictureBox pic)
+        public static Vector2 CreatePosition(PictureBox pic)
         {
             return new Vector2(pic.Location.X, pic.Location.Y);
         }
 
-        private Collider CreateCollider(PictureBox pic, int padding)
+        public static Collider CreateCollider(PictureBox pic, int padding)
         {
             Rectangle rect = new Rectangle(pic.Location, new Size(pic.Size.Width - padding, pic.Size.Height - padding));
             return new Collider(rect);
@@ -194,7 +194,7 @@ namespace Fall2020_CSC403_Project
             return hitAWall;
         }
 
-        private bool HitAChar(Character you, Character other)
+        public static bool HitAChar(Character you, Character other)
         {
             if (other != null)
             {
