@@ -29,9 +29,19 @@ namespace Fall2020_CSC403_Project.Forms
         private Character pb4;
         private Character pb5;
         private Character pb6;
+
+        private Character p1;
+        private Character p2;
         public BonusLevel()
         {
             InitializeComponent();
+            pb1 = new Character(FrmLevel.CreatePosition(pictureBox1), FrmLevel.CreateCollider(pictureBox1, 0));
+            pb2 = new Character(FrmLevel.CreatePosition(pictureBox2), FrmLevel.CreateCollider(pictureBox2, 0));
+            pb3 = new Character(FrmLevel.CreatePosition(pictureBox3), FrmLevel.CreateCollider(pictureBox3, 0));
+            pb4 = new Character(FrmLevel.CreatePosition(pictureBox4), FrmLevel.CreateCollider(pictureBox4, 0));
+            pb5 = new Character(FrmLevel.CreatePosition(pictureBox5), FrmLevel.CreateCollider(pictureBox5, 0));
+            pb6 = new Character(FrmLevel.CreatePosition(pictureBox6), FrmLevel.CreateCollider(pictureBox6, 0));
+
             cameraPosition = new Vector2(0, 0);
             prevCameraPosition = cameraPosition;
             Image originalImage = Properties.Resources.brick;
@@ -50,14 +60,16 @@ namespace Fall2020_CSC403_Project.Forms
 
             floor1.Location = new Point(floor1.Location.X - (int)cameraPosition.x, floor1.Location.Y - (int)cameraPosition.y);
             character.Location = new Point(character.Location.X - (int)cameraPosition.x, character.Location.Y - (int)cameraPosition.y);
-            floor = new Character(FrmLevel.CreatePosition(floor1), FrmLevel.CreateCollider(floor1, -50));
+            pictureBox1.Location = new Point(pictureBox1.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox1.Location.Y);
+            pictureBox2.Location = new Point(pictureBox2.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox2.Location.Y);
+            pictureBox3.Location = new Point(pictureBox3.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox3.Location.Y);
+            pictureBox4.Location = new Point(pictureBox4.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox4.Location.Y);
+            pictureBox5.Location = new Point(pictureBox5.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox5.Location.Y);
+            pictureBox6.Location = new Point(pictureBox6.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox6.Location.Y);
 
-            pb1 = new Character(FrmLevel.CreatePosition(pictureBox1), FrmLevel.CreateCollider(pictureBox1, 0));
-            pb2 = new Character(FrmLevel.CreatePosition(pictureBox2), FrmLevel.CreateCollider(pictureBox2, 0));
-            pb3 = new Character(FrmLevel.CreatePosition(pictureBox3), FrmLevel.CreateCollider(pictureBox3, 0));
-            pb4 = new Character(FrmLevel.CreatePosition(pictureBox4), FrmLevel.CreateCollider(pictureBox4, 0));
-            pb5 = new Character(FrmLevel.CreatePosition(pictureBox5), FrmLevel.CreateCollider(pictureBox5, 0));
-            pb6 = new Character(FrmLevel.CreatePosition(pictureBox6), FrmLevel.CreateCollider(pictureBox6, 0));
+            p1 = new Character(FrmLevel.CreatePosition(pipe1), FrmLevel.CreateCollider(pipe1, 0));
+            p2 = new Character(FrmLevel.CreatePosition(pipe2), FrmLevel.CreateCollider(pipe2, 0));
+
         }
 
         private void BonusLevel_tick(object sender, EventArgs e)
@@ -91,12 +103,14 @@ namespace Fall2020_CSC403_Project.Forms
             // Adjust the position of other game objects based on the camera's position
             // ...
             pictureBox1.Location = new Point(pictureBox1.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox1.Location.Y);
-            UpdateColliderPosition(pb1, pictureBox1);
             pictureBox2.Location = new Point(pictureBox2.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox2.Location.Y);
             pictureBox3.Location = new Point(pictureBox3.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox3.Location.Y);
             pictureBox4.Location = new Point(pictureBox4.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox4.Location.Y);
             pictureBox5.Location = new Point(pictureBox5.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox5.Location.Y);
             pictureBox6.Location = new Point(pictureBox6.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox6.Location.Y);
+
+            pipe1.Location = new Point(pipe1.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pipe1.Location.Y);
+            pipe2.Location = new Point(pipe2.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pipe2.Location.Y);
 
             prevCameraPosition = cameraPosition;
         }
@@ -193,6 +207,15 @@ namespace Fall2020_CSC403_Project.Forms
                 return true;
             }
             if (FrmLevel.HitAChar(you, pb6))
+            {
+                return true;
+            }
+
+            if (FrmLevel.HitAChar(you, p1))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, p2))
             {
                 return true;
             }

@@ -41,6 +41,8 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pipe1 = new System.Windows.Forms.PictureBox();
+            this.pipe2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.floor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.character)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftBarrier)).BeginInit();
@@ -50,6 +52,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pipe1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pipe2)).BeginInit();
             this.SuspendLayout();
             // 
             // floor1
@@ -155,12 +159,36 @@
             this.pictureBox6.TabIndex = 8;
             this.pictureBox6.TabStop = false;
             // 
+            // pipe1
+            // 
+            this.pipe1.BackColor = System.Drawing.Color.Transparent;
+            this.pipe1.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.pipe;
+            this.pipe1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pipe1.Location = new System.Drawing.Point(2048, 606);
+            this.pipe1.Name = "pipe1";
+            this.pipe1.Size = new System.Drawing.Size(160, 227);
+            this.pipe1.TabIndex = 9;
+            this.pipe1.TabStop = false;
+            // 
+            // pipe2
+            // 
+            this.pipe2.BackColor = System.Drawing.Color.Transparent;
+            this.pipe2.BackgroundImage = global::Fall2020_CSC403_Project.Properties.Resources.pipe;
+            this.pipe2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pipe2.Location = new System.Drawing.Point(2727, 606);
+            this.pipe2.Name = "pipe2";
+            this.pipe2.Size = new System.Drawing.Size(160, 227);
+            this.pipe2.TabIndex = 10;
+            this.pipe2.TabStop = false;
+            // 
             // BonusLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ClientSize = new System.Drawing.Size(3602, 900);
+            this.Controls.Add(this.pipe2);
+            this.Controls.Add(this.pipe1);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
@@ -184,6 +212,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pipe1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pipe2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -201,5 +231,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pipe1;
+        private System.Windows.Forms.PictureBox pipe2;
     }
 }
