@@ -19,6 +19,7 @@ namespace Fall2020_CSC403_Project.Forms
 
         private Player player;
         private Character floor;
+        private Character leftBarrierObj;
         private Vector2 cameraPosition;
         private Vector2 prevCameraPosition;
         public BonusLevel()
@@ -37,12 +38,19 @@ namespace Fall2020_CSC403_Project.Forms
             player = new Player(FrmLevel.CreatePosition(character), FrmLevel.CreateCollider(character, -20));
             /*player.KeysPressed.Add("gravity", new Vector2(0, 3));*/
             floor = new Character(FrmLevel.CreatePosition(floor1), FrmLevel.CreateCollider(floor1, -50));
+            leftBarrierObj = new Character(FrmLevel.CreatePosition(leftBarrier), FrmLevel.CreateCollider(leftBarrier, 0));
+
+
             floor1.Location = new Point(floor1.Location.X - (int)cameraPosition.x, floor1.Location.Y - (int)cameraPosition.y);
             character.Location = new Point(character.Location.X - (int)cameraPosition.x, character.Location.Y - (int)cameraPosition.y);
+            floor = new Character(FrmLevel.CreatePosition(floor1), FrmLevel.CreateCollider(floor1, -50));
         }
 
         private void BonusLevel_tick(object sender, EventArgs e)
         {
+            if(FrmLevel.HitAChar(player, leftBarrierObj)){
+                player.MoveBack();
+            }
             bool isOnFloor = FrmLevel.HitAChar(player, floor);
             player.Move(true);
             player.IsGrounded = isOnFloor;
@@ -54,7 +62,7 @@ namespace Fall2020_CSC403_Project.Forms
 
             // Adjust the position of the floor based on the camera's position
             floor1.Location = new Point(floor1.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), floor1.Location.Y);
-
+            leftBarrier.Location = new Point(floor1.Location.X, leftBarrier.Location.Y);
             // Adjust the position of other game objects based on the camera's position
             // ...
 

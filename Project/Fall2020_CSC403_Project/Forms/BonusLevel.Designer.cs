@@ -33,8 +33,10 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.character = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.leftBarrier = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.floor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.character)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftBarrier)).BeginInit();
             this.SuspendLayout();
             // 
             // floor1
@@ -64,12 +66,21 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.BonusLevel_tick);
             // 
+            // leftBarrier
+            // 
+            this.leftBarrier.Location = new System.Drawing.Point(0, 0);
+            this.leftBarrier.Name = "leftBarrier";
+            this.leftBarrier.Size = new System.Drawing.Size(27, 671);
+            this.leftBarrier.TabIndex = 2;
+            this.leftBarrier.TabStop = false;
+            // 
             // BonusLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ClientSize = new System.Drawing.Size(1176, 726);
+            this.Controls.Add(this.leftBarrier);
             this.Controls.Add(this.character);
             this.Controls.Add(this.floor1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -79,6 +90,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmLevel_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.floor1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.character)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftBarrier)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -89,5 +101,6 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.PictureBox character;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox leftBarrier;
     }
 }

@@ -173,6 +173,7 @@
   <ItemGroup>
     <Content Include="data\sounds\boss-battle.wav" />
     <Content Include="data\sounds\battle.wav" />
+    <None Include="Resources\questionbox.png" />
     <None Include="Resources\donald.png" />
     <None Include="Resources\skull.png" />
     <None Include="Resources\brick.png" />
