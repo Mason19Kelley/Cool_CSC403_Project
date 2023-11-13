@@ -22,6 +22,13 @@ namespace Fall2020_CSC403_Project.Forms
         private Character leftBarrierObj;
         private Vector2 cameraPosition;
         private Vector2 prevCameraPosition;
+
+        private Character pb1;
+        private Character pb2;
+        private Character pb3;
+        private Character pb4;
+        private Character pb5;
+        private Character pb6;
         public BonusLevel()
         {
             InitializeComponent();
@@ -33,7 +40,7 @@ namespace Fall2020_CSC403_Project.Forms
             Image resizedImage = ResizeImage(originalImage, new Size(50, 50)); // Replace with your desired width and height
 
             // Set the resized image to the PictureBox
-            SetImage(floor1, resizedImage, 28);
+            SetImage(floor1, resizedImage, 90);
 
             player = new Player(FrmLevel.CreatePosition(character), FrmLevel.CreateCollider(character, -20));
             /*player.KeysPressed.Add("gravity", new Vector2(0, 3));*/
@@ -44,6 +51,13 @@ namespace Fall2020_CSC403_Project.Forms
             floor1.Location = new Point(floor1.Location.X - (int)cameraPosition.x, floor1.Location.Y - (int)cameraPosition.y);
             character.Location = new Point(character.Location.X - (int)cameraPosition.x, character.Location.Y - (int)cameraPosition.y);
             floor = new Character(FrmLevel.CreatePosition(floor1), FrmLevel.CreateCollider(floor1, -50));
+
+            pb1 = new Character(FrmLevel.CreatePosition(pictureBox1), FrmLevel.CreateCollider(pictureBox1, 0));
+            pb2 = new Character(FrmLevel.CreatePosition(pictureBox2), FrmLevel.CreateCollider(pictureBox2, 0));
+            pb3 = new Character(FrmLevel.CreatePosition(pictureBox3), FrmLevel.CreateCollider(pictureBox3, 0));
+            pb4 = new Character(FrmLevel.CreatePosition(pictureBox4), FrmLevel.CreateCollider(pictureBox4, 0));
+            pb5 = new Character(FrmLevel.CreatePosition(pictureBox5), FrmLevel.CreateCollider(pictureBox5, 0));
+            pb6 = new Character(FrmLevel.CreatePosition(pictureBox6), FrmLevel.CreateCollider(pictureBox6, 0));
         }
 
         private void BonusLevel_tick(object sender, EventArgs e)
@@ -51,7 +65,18 @@ namespace Fall2020_CSC403_Project.Forms
             if(FrmLevel.HitAChar(player, leftBarrierObj)){
                 player.MoveBack();
             }
-            bool isOnFloor = FrmLevel.HitAChar(player, floor);
+            if (player.MoveSpeed.y > 0 && (FrmLevel.HitAChar(player, pb1) || FrmLevel.HitAChar(player, pb2) || FrmLevel.HitAChar(player, pb3) || FrmLevel.HitAChar(player, pb4) || FrmLevel.HitAChar(player, pb5) || FrmLevel.HitAChar(player, pb6)))
+            {
+                // Prevent the character from moving through the picture box
+                player.MoveBack();
+            }
+            if (player.MoveSpeed.y < 0 && (FrmLevel.HitAChar(player, pb1) || FrmLevel.HitAChar(player, pb2) || FrmLevel.HitAChar(player, pb3) || FrmLevel.HitAChar(player, pb4) || FrmLevel.HitAChar(player, pb5) || FrmLevel.HitAChar(player, pb6)))
+            {
+                // Prevent the character from moving through the picture box
+                player.MoveBack();
+            }
+
+            bool isOnFloor = HitAny(player);
             player.Move(true);
             player.IsGrounded = isOnFloor;
             cameraPosition.x = (int)(player.Position.x - this.ClientSize.Width / 2.9);
@@ -65,6 +90,13 @@ namespace Fall2020_CSC403_Project.Forms
             leftBarrier.Location = new Point(floor1.Location.X, leftBarrier.Location.Y);
             // Adjust the position of other game objects based on the camera's position
             // ...
+            pictureBox1.Location = new Point(pictureBox1.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox1.Location.Y);
+            UpdateColliderPosition(pb1, pictureBox1);
+            pictureBox2.Location = new Point(pictureBox2.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox2.Location.Y);
+            pictureBox3.Location = new Point(pictureBox3.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox3.Location.Y);
+            pictureBox4.Location = new Point(pictureBox4.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox4.Location.Y);
+            pictureBox5.Location = new Point(pictureBox5.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox5.Location.Y);
+            pictureBox6.Location = new Point(pictureBox6.Location.X - (int)(cameraPosition.x - prevCameraPosition.x), pictureBox6.Location.Y);
 
             prevCameraPosition = cameraPosition;
         }
@@ -133,6 +165,44 @@ namespace Fall2020_CSC403_Project.Forms
                 return new Bitmap(image, newSize);
             }
             return null;
+        }
+
+        private bool HitAny(Character you)
+        {
+            if(FrmLevel.HitAChar(player, floor)){
+                return true;
+            }
+            if(FrmLevel.HitAChar(you, pb1))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, pb2))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, pb3))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, pb4))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, pb5))
+            {
+                return true;
+            }
+            if (FrmLevel.HitAChar(you, pb6))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void UpdateColliderPosition(Character character, PictureBox pictureBox)
+        {
+            character.Collider.MovePosition(pictureBox.Location.X, pictureBox.Location.Y);
         }
 
     }
