@@ -1,4 +1,5 @@
 ﻿using Fall2020_CSC403_Project.code;
+using Fall2020_CSC403_Project.Forms;
 using Fall2020_CSC403_Project.Properties;
 using MyGameLibrary;
 using System;
@@ -13,7 +14,9 @@ namespace Fall2020_CSC403_Project {
     public static FrmBattle instance = null;
     private Enemy enemy;
     private Player player;
+    private Inventory inventory;
     Random atkchoice = new Random();
+    private DeathScreen deathScreen;
 
     private FrmBattle() {
       InitializeComponent();
@@ -53,11 +56,12 @@ namespace Fall2020_CSC403_Project {
       tmrFinalBattle.Enabled = true;
     }
 
-    public static FrmBattle GetInstance(Enemy enemy) {
+    public static FrmBattle GetInstance(Enemy enemy, Inventory inventory) {
       if (instance == null) {
         instance = new FrmBattle();
         instance.enemy = enemy;
         instance.Setup();
+        instance.inventory = inventory;
       }
       return instance;
     }
@@ -112,8 +116,9 @@ namespace Fall2020_CSC403_Project {
       btnHeavyAttack.Enabled = true;
       if (player.Health <= 0) {
         MusicPlayer.StopBattleSound();
+        openDeathScreen();
 
-        if(player.Health <= 0 && enemy.Health > 0)
+                if (player.Health <= 0 && enemy.Health > 0)
         {
           MusicPlayer.StopLevelMusic();
           MusicPlayer.PlayGameOverSound();
@@ -127,45 +132,50 @@ namespace Fall2020_CSC403_Project {
 
       if (enemy.Health <= 0)
       {
-        RemoveEnemy(enemy);
+                MusicPlayer.StopBattleSound();
+                MusicPlayer.PlayLevelMusic();
+                RemoveEnemy(enemy);
         instance = null;
         Close();
       }
     }
    private async void btnHeavyAttack_Click(object sender, EventArgs e){
-      lblDamage.Text = "  Dealt 16 damage!";
-      btnHeavyAttack.Enabled = false;
-      HitDisplay();
-      await Task.Delay(1500);
-      player.OnHeavyAttack(-4);
-      if (enemy.Health > 0){
-        int enemyatk = atkchoice.Next(1, 4);
-        if (enemyatk == 1) {
-          enemy.OnAttack(-2);
-        }
-        else if (enemyatk == 2) {
-          enemy.OnHeavyAttack(-2);
-        }
-        else if (enemyatk == 3) {
-          if(enemy.special == 1) {
-            enemy.CheetoSpecial(-2);   
+      if(inventory.ContainsAttribute(inventory, "Heavy")){
+        lblDamage.Text = "  Dealt 16 damage!";
+        btnHeavyAttack.Enabled = false;
+        HitDisplay();
+        await Task.Delay(1500);
+        player.OnHeavyAttack(-4);
+        if (enemy.Health > 0){
+          int enemyatk = atkchoice.Next(1, 4);
+          if (enemyatk == 1) {
+            enemy.OnAttack(-2);
           }
-          else if(enemy.special == 2) {
-            enemy.PoisonSpecial(-2);
+          else if (enemyatk == 2) {
+            enemy.OnHeavyAttack(-2);
           }
-          else if(enemy.special == 3) {
-            enemy.KoolAidSpecial(-2);
+          else if (enemyatk == 3) {
+            if(enemy.special == 1) {
+              enemy.CheetoSpecial(-2);   
+            }
+            else if(enemy.special == 2) {
+              enemy.PoisonSpecial(-2);
+            }
+            else if(enemy.special == 3) {
+              enemy.KoolAidSpecial(-2);
+            }
           }
         }
+        EnemyDmgDisplay();
+        await Task.Delay(1750);     
+        UpdateHealthBars();
+        await Task.Delay(750);
+        DmgGivenDisplay();
       }
-      EnemyDmgDisplay();
-      await Task.Delay(1750);     
-      UpdateHealthBars();
-      await Task.Delay(750);
-      DmgGivenDisplay();
       if (player.Health <= 0)
       {
         MusicPlayer.StopBattleSound();
+        openDeathScreen();
 
         if (player.Health <= 0 && enemy.Health > 0)
         {
@@ -183,7 +193,9 @@ namespace Fall2020_CSC403_Project {
 
       if (enemy.Health <= 0)
       {
-            RemoveEnemy(enemy);
+                MusicPlayer.StopBattleSound();
+                MusicPlayer.PlayLevelMusic();
+                RemoveEnemy(enemy);
             instance = null;
             Close();
       }
@@ -191,9 +203,12 @@ namespace Fall2020_CSC403_Project {
    }
     private void btnHeal_Click(object sender, EventArgs e)
     {
-      player.AlterHealth(4);
-      UpdateHealthBars();  
-      btnHeal.Enabled = false;
+       if(inventory.ContainsAttribute(inventory, "Healing"))
+       {
+          player.AlterHealth(4);
+          UpdateHealthBars();
+          btnHeal.Enabled = false;
+       }
     }
     private void EnemyDamage(int amount) {
       enemy.AlterHealth(amount);
@@ -282,6 +297,12 @@ namespace Fall2020_CSC403_Project {
 
             // Set the instance to null to allow a new instance to be created if needed
             instance = null;
+        }
+
+        private void openDeathScreen()
+        {
+            deathScreen = new DeathScreen();
+            deathScreen.Show();
         }
 
     }

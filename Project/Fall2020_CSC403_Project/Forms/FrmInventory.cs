@@ -28,7 +28,7 @@ namespace Fall2020_CSC403_Project
 
                 slot.BackgroundImage = item.Img; 
                 slot.Tag = item.Name.ToString();
-                
+  
             }
         }
 
@@ -76,7 +76,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot2.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot2.Tag.ToString();
             }
         }
 
@@ -84,7 +84,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot3.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot3.Tag.ToString();
             }
         }
 
@@ -92,7 +92,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot4.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot4.Tag.ToString();
             }
         }
 

@@ -21,6 +21,7 @@ namespace Fall2020_CSC403_Project
         private Character[] walls;
 
         private Item gun;
+        private Item potion;
         private Inventory inventory;
 
         private DateTime timeBegin;
@@ -42,10 +43,16 @@ namespace Fall2020_CSC403_Project
 
         private BonusLevel bonusLevel;
 
+        private DeathScreen deathScreen = DeathScreen.Instance;
+
+        public static FrmLevel Instance { get; private set; }
+
+
         public FrmLevel()
         {
             InitializeComponent();
             this.KeyPreview = true;
+            Instance = this;
         }
 
         private void FrmLevel_Load(object sender, EventArgs e)
@@ -53,8 +60,10 @@ namespace Fall2020_CSC403_Project
             const int PADDING = 7;
             const int NUM_WALLS = 13;
 
-            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun");
+            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
+            potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
+            potion.Img = picPotion.BackgroundImage;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
@@ -91,12 +100,12 @@ namespace Fall2020_CSC403_Project
             timeBegin = DateTime.Now;
         }
 
-        private Vector2 CreatePosition(PictureBox pic)
+        public static Vector2 CreatePosition(PictureBox pic)
         {
             return new Vector2(pic.Location.X, pic.Location.Y);
         }
 
-        private Collider CreateCollider(PictureBox pic, int padding)
+        public static Collider CreateCollider(PictureBox pic, int padding)
         {
             Rectangle rect = new Rectangle(pic.Location, new Size(pic.Size.Width - padding, pic.Size.Height - padding));
             return new Collider(rect);
@@ -138,42 +147,45 @@ namespace Fall2020_CSC403_Project
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
-            // move player
-            player.Move();
+            if (deathScreen == null)
+            {
+                // move player
+                player.Move();
 
-            // check collision with walls
-            if (HitAWall(player))
-            {
-                player.MoveBack();
-            }
+                // check collision with walls
+                if (HitAWall(player))
+                {
+                    player.MoveBack();
+                }
 
-            // check collision with enemies
-            if (HitAChar(player, enemyPoisonPacket))
-            {
-                Fight(enemyPoisonPacket);
-            }
-            else if (HitAChar(player, enemyCheeto))
-            {
-                Fight(enemyCheeto);
-            }
-            if (HitAChar(player, bossKoolaid))
-            {
-                Fight(bossKoolaid);
-            }
+                // check collision with enemies
+                if (HitAChar(player, enemyPoisonPacket))
+                {
+                    Fight(enemyPoisonPacket);
+                }
+                else if (HitAChar(player, enemyCheeto))
+                {
+                    Fight(enemyCheeto);
+                }
+                if (HitAChar(player, bossKoolaid))
+                {
+                    Fight(bossKoolaid);
+                }
 
-            if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
-            {
-                // Handle collision, e.g., prevent the character from moving
-                player.MoveBack();
-            }
+                if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
+                {
+                    // Handle collision, e.g., prevent the character from moving
+                    player.MoveBack();
+                }
 
-            if(HitAChar(player, pipeCollider))
-            {
-                openBonusLevel();
-            }
+                if (HitAChar(player, pipeCollider))
+                {
+                    openBonusLevel();
+                }
 
-            // update player's picture box
-            mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+                // update player's picture box
+                mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+            }
         }
 
         private bool HitAWall(Character c)
@@ -190,7 +202,7 @@ namespace Fall2020_CSC403_Project
             return hitAWall;
         }
 
-        private bool HitAChar(Character you, Character other)
+        public static bool HitAChar(Character you, Character other)
         {
             if (other != null)
             {
@@ -216,7 +228,7 @@ namespace Fall2020_CSC403_Project
             MusicPlayer.StopLevelMusic();
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy);
+            frmBattle = FrmBattle.GetInstance(enemy, inventory);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
@@ -226,6 +238,21 @@ namespace Fall2020_CSC403_Project
 
 
 
+        }
+
+        private void PickUpItem(Character you)
+        {
+            if (HitAItem(you, gun))
+            {
+                inventory.AddItem(gun);
+                picGun.Dispose();
+                gun = null;
+            } else if (HitAItem(you, potion))
+            {
+                inventory.AddItem(potion);
+                picPotion.Dispose();
+                picPotion = null;
+            }
         }
 
         private void ShowInven() {
@@ -267,12 +294,7 @@ namespace Fall2020_CSC403_Project
                         break;
 
                     case Keys.E:
-                        if(HitAItem(player, gun))
-                        {
-                            inventory.AddItem(gun);
-                            picGun.Dispose();
-                            gun = null;
-                        }
+                        PickUpItem(player);
                     break;
                     
                     case Keys.I:

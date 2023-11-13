@@ -46,6 +46,7 @@ namespace Fall2020_CSC403_Project {
             this.picWall3 = new System.Windows.Forms.PictureBox();
             this.picBossKoolAid = new System.Windows.Forms.PictureBox();
             this.picGun = new System.Windows.Forms.PictureBox();
+            this.picPotion = new System.Windows.Forms.PictureBox();
             this.pipe = new System.Windows.Forms.PictureBox();
             this.barrier = new System.Windows.Forms.PictureBox();
             this.barrier2 = new System.Windows.Forms.PictureBox();
@@ -68,6 +69,7 @@ namespace Fall2020_CSC403_Project {
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPotion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pipe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barrier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barrier2)).BeginInit();
@@ -110,7 +112,7 @@ namespace Fall2020_CSC403_Project {
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1176, 716);
+            this.panel1.Size = new System.Drawing.Size(1176, 726);
             this.panel1.TabIndex = 18;
             this.panel1.Visible = false;
             // 
@@ -386,11 +388,23 @@ namespace Fall2020_CSC403_Project {
             // 
             this.picGun.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picGun.BackgroundImage")));
             this.picGun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picGun.Location = new System.Drawing.Point(572, 301);
+            this.picGun.Location = new System.Drawing.Point(764, 357);
+            this.picGun.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picGun.Name = "picGun";
             this.picGun.Size = new System.Drawing.Size(73, 59);
             this.picGun.TabIndex = 19;
             this.picGun.TabStop = false;
+            // 
+            // picPotion
+            // 
+            this.picPotion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPotion.BackgroundImage")));
+            this.picPotion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picPotion.Location = new System.Drawing.Point(525, 177);
+            this.picPotion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picPotion.Name = "picPotion";
+            this.picPotion.Size = new System.Drawing.Size(56, 58);
+            this.picPotion.TabIndex = 20;
+            this.picPotion.TabStop = false;
             // 
             // pipe
             // 
@@ -430,7 +444,7 @@ namespace Fall2020_CSC403_Project {
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1176, 716);
+            this.ClientSize = new System.Drawing.Size(1176, 726);
             this.Controls.Add(this.barrier2);
             this.Controls.Add(this.barrier);
             this.Controls.Add(this.pipe);
@@ -454,6 +468,7 @@ namespace Fall2020_CSC403_Project {
             this.Controls.Add(this.picWall3);
             this.Controls.Add(this.picBossKoolAid);
             this.Controls.Add(this.picGun);
+            this.Controls.Add(this.picPotion);
             this.DoubleBuffered = true;
             this.Name = "FrmLevel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -481,6 +496,7 @@ namespace Fall2020_CSC403_Project {
             ((System.ComponentModel.ISupportInitialize)(this.picWall3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBossKoolAid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPotion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pipe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barrier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barrier2)).EndInit();
@@ -517,6 +533,7 @@ namespace Fall2020_CSC403_Project {
         private System.Windows.Forms.RichTextBox richTextBox1;
     private System.Windows.Forms.PictureBox mainCharacter;
         private System.Windows.Forms.PictureBox picGun;
+        private System.Windows.Forms.PictureBox picPotion;
         private System.Windows.Forms.PictureBox pipe;
         private System.Windows.Forms.PictureBox barrier;
         private System.Windows.Forms.PictureBox barrier2;

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DeathScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DeathScreen.Designer.cs">
+      <DependentUpon>DeathScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BonusLevel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfirmQuit.resx">
       <DependentUpon>ConfirmQuit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DeathScreen.resx">
+      <DependentUpon>DeathScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmBattle.resx">
       <DependentUpon>FrmBattle.cs</DependentUpon>
@@ -164,6 +173,8 @@
   <ItemGroup>
     <Content Include="data\sounds\boss-battle.wav" />
     <Content Include="data\sounds\battle.wav" />
+    <None Include="Resources\donald.png" />
+    <None Include="Resources\skull.png" />
     <None Include="Resources\brick.png" />
     <None Include="Resources\pipe.png" />
     <None Include="Resources\pipe.bmp" />
