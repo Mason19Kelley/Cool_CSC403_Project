@@ -417,6 +417,7 @@ namespace Fall2020_CSC403_Project {
             this.pipe.Size = new System.Drawing.Size(106, 92);
             this.pipe.TabIndex = 20;
             this.pipe.TabStop = false;
+            this.pipe.Visible = false;
             // 
             // barrier
             // 

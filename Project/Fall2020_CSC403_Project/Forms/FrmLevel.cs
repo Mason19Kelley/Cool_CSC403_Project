@@ -2,9 +2,11 @@
 using Fall2020_CSC403_Project.Forms;
 using MyGameLibrary;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Fall2020_CSC403_Project
@@ -32,6 +34,12 @@ namespace Fall2020_CSC403_Project
         private Character pipeCollider;
 
         private ConfirmQuit confirmQuit = null;
+
+        private const int MaxInputHistory = 11;
+        private List<string> keylog = new List<string>();
+        private readonly string[] KonamiCode = { "Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A" };
+        private int currentPatternIndex = 0;
+
 
         private BonusLevel bonusLevel;
 
@@ -310,7 +318,6 @@ namespace Fall2020_CSC403_Project
                         else
                         {
                             this.CloseOverlay();
-                            Console.WriteLine("here");
                         }
                         break;
 
@@ -403,9 +410,20 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyUp(object sender, KeyEventArgs e)
         {
+            Keys key = e.KeyCode;
+            string keyPress = key.ToString();
+
+            RecordInput(keyPress);
+           
+            
+            string temp = "[" + string.Join(", ", keylog) + "]";
+
+            Console.WriteLine(temp);
+
             switch (e.KeyCode)
             {
                 case Keys.Left:
+
                     player.KeysPressed.Remove("left");
                     break;
 
@@ -424,6 +442,47 @@ namespace Fall2020_CSC403_Project
 
         }
 
+        public void RecordInput(string input)
+        {
+            keylog.Add(input);
+            if(keylog.Count > MaxInputHistory)
+            {
+                keylog.RemoveAt(0);
+            }
+            CheckForCheatCode();
+        }
+        private void CheckForCheatCode()
+        {
+            // Compare the recent inputs with the cheat code pattern
+            int startIndex = Math.Max(0, keylog.Count - KonamiCode.Length);
+
+            for (int i = startIndex; i < keylog.Count; i++)
+            {
+                if (keylog[i] == KonamiCode[currentPatternIndex])
+                {
+                    currentPatternIndex++;
+
+                    if (currentPatternIndex == KonamiCode.Length)
+                    {
+                        Console.WriteLine("Cheat code activated!");
+                        pipe.Visible = true;
+                        // Add your cheat code logic here
+                        ResetPattern();
+                        break;
+                    }
+                }
+                else
+                {
+                    ResetPattern();
+                    break;
+                }
+            }
+        }
+
+        private void ResetPattern()
+        {
+            currentPatternIndex = 0;
+        }
 
 
         private void lblInGameTime_Click(object sender, EventArgs e)
