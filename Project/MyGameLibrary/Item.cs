@@ -16,6 +16,8 @@ namespace Fall2020_CSC403_Project.code
 
         public int Durability { get; set; }
 
+        public int MaxDurability { get; set; }
+
         /// <summary>
         /// The Creation of the item.
         /// </summary>

@@ -141,7 +141,7 @@ namespace Fall2020_CSC403_Project {
       if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Heavy") & 
                 FrmLevel.Instance.inventory.itemHasDurability(FrmLevel.Instance.inventory, "Heavy")){
 
-        FrmLevel.Instance.gun.Durability -= 1;
+        
         lblDamage.Text = "  Dealt 16 damage!";
         btnHeavyAttack.Enabled = false;
         HitDisplay();
@@ -172,6 +172,7 @@ namespace Fall2020_CSC403_Project {
         UpdateHealthBars();
         await Task.Delay(750);
         DmgGivenDisplay();
+        FrmLevel.Instance.gun.Durability -= 1;
       }
       if (player.Health <= 0)
       {

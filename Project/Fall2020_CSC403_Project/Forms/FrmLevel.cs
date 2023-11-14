@@ -63,9 +63,11 @@ namespace Fall2020_CSC403_Project
             gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
             gun.Durability = 5;
+            gun.MaxDurability= 5;
             potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
             potion.Img = picPotion.BackgroundImage;
             potion.Durability = 2;
+            potion.MaxDurability= 2;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
@@ -248,7 +250,7 @@ namespace Fall2020_CSC403_Project
             {
                 inventory.AddItem(gun);
                 picGun.Dispose();
-                gun = null;
+                picGun = null;
             } else if (HitAItem(you, potion))
             {
                 inventory.AddItem(potion);

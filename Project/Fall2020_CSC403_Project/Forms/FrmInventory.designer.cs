@@ -54,6 +54,30 @@
             this.slot11 = new System.Windows.Forms.PictureBox();
             this.slot12 = new System.Windows.Forms.PictureBox();
             this.title = new System.Windows.Forms.TextBox();
+            this.durback1 = new System.Windows.Forms.Label();
+            this.durback2 = new System.Windows.Forms.Label();
+            this.durback3 = new System.Windows.Forms.Label();
+            this.durback4 = new System.Windows.Forms.Label();
+            this.durback5 = new System.Windows.Forms.Label();
+            this.durback6 = new System.Windows.Forms.Label();
+            this.durback7 = new System.Windows.Forms.Label();
+            this.durback8 = new System.Windows.Forms.Label();
+            this.durback9 = new System.Windows.Forms.Label();
+            this.durback10 = new System.Windows.Forms.Label();
+            this.durback11 = new System.Windows.Forms.Label();
+            this.durback12 = new System.Windows.Forms.Label();
+            this.durf8 = new System.Windows.Forms.Label();
+            this.durf1 = new System.Windows.Forms.Label();
+            this.durf2 = new System.Windows.Forms.Label();
+            this.durf3 = new System.Windows.Forms.Label();
+            this.durf4 = new System.Windows.Forms.Label();
+            this.durf7 = new System.Windows.Forms.Label();
+            this.durf6 = new System.Windows.Forms.Label();
+            this.durf5 = new System.Windows.Forms.Label();
+            this.durf9 = new System.Windows.Forms.Label();
+            this.durf10 = new System.Windows.Forms.Label();
+            this.durf11 = new System.Windows.Forms.Label();
+            this.durf12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.invSlot1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invSlot2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invSlot6)).BeginInit();
@@ -360,12 +384,277 @@
             this.title.TabIndex = 25;
             this.title.Text = "Inventory";
             // 
+            // durback1
+            // 
+            this.durback1.BackColor = System.Drawing.Color.Black;
+            this.durback1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback1.ForeColor = System.Drawing.Color.White;
+            this.durback1.Location = new System.Drawing.Point(60, 235);
+            this.durback1.Name = "durback1";
+            this.durback1.Size = new System.Drawing.Size(102, 14);
+            this.durback1.TabIndex = 28;
+            // 
+            // durback2
+            // 
+            this.durback2.BackColor = System.Drawing.Color.Black;
+            this.durback2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback2.ForeColor = System.Drawing.Color.White;
+            this.durback2.Location = new System.Drawing.Point(208, 235);
+            this.durback2.Name = "durback2";
+            this.durback2.Size = new System.Drawing.Size(102, 14);
+            this.durback2.TabIndex = 29;
+            // 
+            // durback3
+            // 
+            this.durback3.BackColor = System.Drawing.Color.Black;
+            this.durback3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback3.ForeColor = System.Drawing.Color.White;
+            this.durback3.Location = new System.Drawing.Point(361, 236);
+            this.durback3.Name = "durback3";
+            this.durback3.Size = new System.Drawing.Size(102, 14);
+            this.durback3.TabIndex = 30;
+            // 
+            // durback4
+            // 
+            this.durback4.BackColor = System.Drawing.Color.Black;
+            this.durback4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback4.ForeColor = System.Drawing.Color.White;
+            this.durback4.Location = new System.Drawing.Point(510, 236);
+            this.durback4.Name = "durback4";
+            this.durback4.Size = new System.Drawing.Size(102, 14);
+            this.durback4.TabIndex = 31;
+            // 
+            // durback5
+            // 
+            this.durback5.BackColor = System.Drawing.Color.Black;
+            this.durback5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback5.ForeColor = System.Drawing.Color.White;
+            this.durback5.Location = new System.Drawing.Point(59, 380);
+            this.durback5.Name = "durback5";
+            this.durback5.Size = new System.Drawing.Size(102, 14);
+            this.durback5.TabIndex = 32;
+            // 
+            // durback6
+            // 
+            this.durback6.BackColor = System.Drawing.Color.Black;
+            this.durback6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback6.ForeColor = System.Drawing.Color.White;
+            this.durback6.Location = new System.Drawing.Point(208, 381);
+            this.durback6.Name = "durback6";
+            this.durback6.Size = new System.Drawing.Size(102, 14);
+            this.durback6.TabIndex = 33;
+            this.durback6.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // durback7
+            // 
+            this.durback7.BackColor = System.Drawing.Color.Black;
+            this.durback7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback7.ForeColor = System.Drawing.Color.White;
+            this.durback7.Location = new System.Drawing.Point(360, 380);
+            this.durback7.Name = "durback7";
+            this.durback7.Size = new System.Drawing.Size(102, 14);
+            this.durback7.TabIndex = 34;
+            // 
+            // durback8
+            // 
+            this.durback8.BackColor = System.Drawing.Color.Black;
+            this.durback8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback8.ForeColor = System.Drawing.Color.White;
+            this.durback8.Location = new System.Drawing.Point(510, 381);
+            this.durback8.Name = "durback8";
+            this.durback8.Size = new System.Drawing.Size(102, 14);
+            this.durback8.TabIndex = 35;
+            // 
+            // durback9
+            // 
+            this.durback9.BackColor = System.Drawing.Color.Black;
+            this.durback9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback9.ForeColor = System.Drawing.Color.White;
+            this.durback9.Location = new System.Drawing.Point(59, 522);
+            this.durback9.Name = "durback9";
+            this.durback9.Size = new System.Drawing.Size(102, 14);
+            this.durback9.TabIndex = 36;
+            // 
+            // durback10
+            // 
+            this.durback10.BackColor = System.Drawing.Color.Black;
+            this.durback10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback10.ForeColor = System.Drawing.Color.White;
+            this.durback10.Location = new System.Drawing.Point(209, 523);
+            this.durback10.Name = "durback10";
+            this.durback10.Size = new System.Drawing.Size(102, 14);
+            this.durback10.TabIndex = 37;
+            // 
+            // durback11
+            // 
+            this.durback11.BackColor = System.Drawing.Color.Black;
+            this.durback11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback11.ForeColor = System.Drawing.Color.White;
+            this.durback11.Location = new System.Drawing.Point(361, 523);
+            this.durback11.Name = "durback11";
+            this.durback11.Size = new System.Drawing.Size(102, 14);
+            this.durback11.TabIndex = 38;
+            // 
+            // durback12
+            // 
+            this.durback12.BackColor = System.Drawing.Color.Black;
+            this.durback12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durback12.ForeColor = System.Drawing.Color.White;
+            this.durback12.Location = new System.Drawing.Point(509, 523);
+            this.durback12.Name = "durback12";
+            this.durback12.Size = new System.Drawing.Size(102, 14);
+            this.durback12.TabIndex = 39;
+            // 
+            // durf8
+            // 
+            this.durf8.BackColor = System.Drawing.Color.IndianRed;
+            this.durf8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf8.ForeColor = System.Drawing.Color.White;
+            this.durf8.Location = new System.Drawing.Point(60, 235);
+            this.durf8.Name = "durf8";
+            this.durf8.Size = new System.Drawing.Size(102, 14);
+            this.durf8.TabIndex = 40;
+            // 
+            // durf1
+            // 
+            this.durf1.BackColor = System.Drawing.Color.IndianRed;
+            this.durf1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf1.ForeColor = System.Drawing.Color.White;
+            this.durf1.Location = new System.Drawing.Point(208, 235);
+            this.durf1.Name = "durf1";
+            this.durf1.Size = new System.Drawing.Size(102, 14);
+            this.durf1.TabIndex = 41;
+            // 
+            // durf2
+            // 
+            this.durf2.BackColor = System.Drawing.Color.IndianRed;
+            this.durf2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf2.ForeColor = System.Drawing.Color.White;
+            this.durf2.Location = new System.Drawing.Point(361, 236);
+            this.durf2.Name = "durf2";
+            this.durf2.Size = new System.Drawing.Size(102, 14);
+            this.durf2.TabIndex = 42;
+            // 
+            // durf3
+            // 
+            this.durf3.BackColor = System.Drawing.Color.IndianRed;
+            this.durf3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf3.ForeColor = System.Drawing.Color.White;
+            this.durf3.Location = new System.Drawing.Point(510, 236);
+            this.durf3.Name = "durf3";
+            this.durf3.Size = new System.Drawing.Size(102, 14);
+            this.durf3.TabIndex = 43;
+            // 
+            // durf4
+            // 
+            this.durf4.BackColor = System.Drawing.Color.IndianRed;
+            this.durf4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf4.ForeColor = System.Drawing.Color.White;
+            this.durf4.Location = new System.Drawing.Point(59, 380);
+            this.durf4.Name = "durf4";
+            this.durf4.Size = new System.Drawing.Size(102, 14);
+            this.durf4.TabIndex = 44;
+            // 
+            // durf7
+            // 
+            this.durf7.BackColor = System.Drawing.Color.IndianRed;
+            this.durf7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf7.ForeColor = System.Drawing.Color.White;
+            this.durf7.Location = new System.Drawing.Point(510, 381);
+            this.durf7.Name = "durf7";
+            this.durf7.Size = new System.Drawing.Size(102, 14);
+            this.durf7.TabIndex = 45;
+            // 
+            // durf6
+            // 
+            this.durf6.BackColor = System.Drawing.Color.IndianRed;
+            this.durf6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf6.ForeColor = System.Drawing.Color.White;
+            this.durf6.Location = new System.Drawing.Point(360, 380);
+            this.durf6.Name = "durf6";
+            this.durf6.Size = new System.Drawing.Size(102, 14);
+            this.durf6.TabIndex = 46;
+            // 
+            // durf5
+            // 
+            this.durf5.BackColor = System.Drawing.Color.IndianRed;
+            this.durf5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf5.ForeColor = System.Drawing.Color.White;
+            this.durf5.Location = new System.Drawing.Point(208, 381);
+            this.durf5.Name = "durf5";
+            this.durf5.Size = new System.Drawing.Size(102, 14);
+            this.durf5.TabIndex = 47;
+            // 
+            // durf9
+            // 
+            this.durf9.BackColor = System.Drawing.Color.IndianRed;
+            this.durf9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf9.ForeColor = System.Drawing.Color.White;
+            this.durf9.Location = new System.Drawing.Point(59, 522);
+            this.durf9.Name = "durf9";
+            this.durf9.Size = new System.Drawing.Size(102, 14);
+            this.durf9.TabIndex = 48;
+            // 
+            // durf10
+            // 
+            this.durf10.BackColor = System.Drawing.Color.IndianRed;
+            this.durf10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf10.ForeColor = System.Drawing.Color.White;
+            this.durf10.Location = new System.Drawing.Point(209, 523);
+            this.durf10.Name = "durf10";
+            this.durf10.Size = new System.Drawing.Size(102, 14);
+            this.durf10.TabIndex = 49;
+            // 
+            // durf11
+            // 
+            this.durf11.BackColor = System.Drawing.Color.IndianRed;
+            this.durf11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf11.ForeColor = System.Drawing.Color.White;
+            this.durf11.Location = new System.Drawing.Point(361, 523);
+            this.durf11.Name = "durf11";
+            this.durf11.Size = new System.Drawing.Size(102, 14);
+            this.durf11.TabIndex = 50;
+            // 
+            // durf12
+            // 
+            this.durf12.BackColor = System.Drawing.Color.IndianRed;
+            this.durf12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.durf12.ForeColor = System.Drawing.Color.White;
+            this.durf12.Location = new System.Drawing.Point(509, 523);
+            this.durf12.Name = "durf12";
+            this.durf12.Size = new System.Drawing.Size(102, 14);
+            this.durf12.TabIndex = 51;
+            // 
             // FrmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OliveDrab;
             this.ClientSize = new System.Drawing.Size(1111, 613);
+            this.Controls.Add(this.durf12);
+            this.Controls.Add(this.durf11);
+            this.Controls.Add(this.durf10);
+            this.Controls.Add(this.durf9);
+            this.Controls.Add(this.durf5);
+            this.Controls.Add(this.durf6);
+            this.Controls.Add(this.durf7);
+            this.Controls.Add(this.durf4);
+            this.Controls.Add(this.durf3);
+            this.Controls.Add(this.durf2);
+            this.Controls.Add(this.durf1);
+            this.Controls.Add(this.durf8);
+            this.Controls.Add(this.durback12);
+            this.Controls.Add(this.durback11);
+            this.Controls.Add(this.durback10);
+            this.Controls.Add(this.durback9);
+            this.Controls.Add(this.durback8);
+            this.Controls.Add(this.durback7);
+            this.Controls.Add(this.durback6);
+            this.Controls.Add(this.durback5);
+            this.Controls.Add(this.durback4);
+            this.Controls.Add(this.durback3);
+            this.Controls.Add(this.durback2);
+            this.Controls.Add(this.durback1);
             this.Controls.Add(this.title);
             this.Controls.Add(this.nameBox);
             this.Controls.Add(this.invSlot12);
@@ -452,5 +741,29 @@
         private System.Windows.Forms.PictureBox slot11;
         private System.Windows.Forms.PictureBox slot12;
         private System.Windows.Forms.TextBox title;
+        private System.Windows.Forms.Label durback1;
+        private System.Windows.Forms.Label durback2;
+        private System.Windows.Forms.Label durback3;
+        private System.Windows.Forms.Label durback4;
+        private System.Windows.Forms.Label durback5;
+        private System.Windows.Forms.Label durback6;
+        private System.Windows.Forms.Label durback7;
+        private System.Windows.Forms.Label durback8;
+        private System.Windows.Forms.Label durback9;
+        private System.Windows.Forms.Label durback10;
+        private System.Windows.Forms.Label durback11;
+        private System.Windows.Forms.Label durback12;
+        private System.Windows.Forms.Label durf8;
+        private System.Windows.Forms.Label durf1;
+        private System.Windows.Forms.Label durf2;
+        private System.Windows.Forms.Label durf3;
+        private System.Windows.Forms.Label durf4;
+        private System.Windows.Forms.Label durf7;
+        private System.Windows.Forms.Label durf6;
+        private System.Windows.Forms.Label durf5;
+        private System.Windows.Forms.Label durf9;
+        private System.Windows.Forms.Label durf10;
+        private System.Windows.Forms.Label durf11;
+        private System.Windows.Forms.Label durf12;
     }
 }
