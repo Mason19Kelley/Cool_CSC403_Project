@@ -138,7 +138,8 @@ namespace Fall2020_CSC403_Project {
       }
     }
    private async void btnHeavyAttack_Click(object sender, EventArgs e){
-      if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Heavy")){
+      if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Heavy") & 
+                FrmLevel.Instance.inventory.itemHasDurability(FrmLevel.Instance.inventory, "Heavy")){
         lblDamage.Text = "  Dealt 16 damage!";
         btnHeavyAttack.Enabled = false;
         HitDisplay();
@@ -201,7 +202,8 @@ namespace Fall2020_CSC403_Project {
    }
     private void btnHeal_Click(object sender, EventArgs e)
     {
-       if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Healing"))
+       if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Healing") &
+                FrmLevel.Instance.inventory.itemHasDurability(FrmLevel.Instance.inventory, "Healing"))
        {
           player.AlterHealth(4);
           UpdateHealthBars();

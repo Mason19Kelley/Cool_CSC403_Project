@@ -22,7 +22,7 @@ namespace Fall2020_CSC403_Project
 
         private Item gun;
         private Item potion;
-        private Inventory inventory;
+        public Inventory inventory;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
@@ -230,7 +230,7 @@ namespace Fall2020_CSC403_Project
             MusicPlayer.StopLevelMusic();
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy, inventory);
+            frmBattle = FrmBattle.GetInstance(enemy);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
