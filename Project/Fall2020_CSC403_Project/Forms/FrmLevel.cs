@@ -20,8 +20,8 @@ namespace Fall2020_CSC403_Project
         public Enemy enemyCheeto;
         private Character[] walls;
 
-        private Item gun;
-        private Item potion;
+        public Item gun;
+        public Item potion;
         public Inventory inventory;
 
         private DateTime timeBegin;
@@ -62,10 +62,10 @@ namespace Fall2020_CSC403_Project
 
             gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
-            gun.Durability = 10;
+            gun.Durability = 5;
             potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
             potion.Img = picPotion.BackgroundImage;
-            potion.Durability = 10;
+            potion.Durability = 2;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));

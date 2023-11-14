@@ -140,6 +140,8 @@ namespace Fall2020_CSC403_Project {
    private async void btnHeavyAttack_Click(object sender, EventArgs e){
       if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Heavy") & 
                 FrmLevel.Instance.inventory.itemHasDurability(FrmLevel.Instance.inventory, "Heavy")){
+
+        FrmLevel.Instance.gun.Durability -= 1;
         lblDamage.Text = "  Dealt 16 damage!";
         btnHeavyAttack.Enabled = false;
         HitDisplay();
@@ -208,6 +210,7 @@ namespace Fall2020_CSC403_Project {
           player.AlterHealth(4);
           UpdateHealthBars();
           btnHeal.Enabled = false;
+          FrmLevel.Instance.potion.Durability -= 1;
        }
     }
     private void EnemyDamage(int amount) {
