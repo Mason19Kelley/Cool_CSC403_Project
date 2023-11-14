@@ -20,9 +20,9 @@ namespace Fall2020_CSC403_Project
         public Enemy enemyCheeto;
         private Character[] walls;
 
-        private Item gun;
-        private Item potion;
-        private Inventory inventory;
+        public Item gun;
+        public Item potion;
+        public Inventory inventory;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
@@ -62,8 +62,12 @@ namespace Fall2020_CSC403_Project
 
             gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
+            gun.Durability = 5;
+            gun.MaxDurability= 5;
             potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
             potion.Img = picPotion.BackgroundImage;
+            potion.Durability = 2;
+            potion.MaxDurability= 2;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
@@ -228,7 +232,7 @@ namespace Fall2020_CSC403_Project
             MusicPlayer.StopLevelMusic();
             player.ResetMoveSpeed();
             player.MoveBack();
-            frmBattle = FrmBattle.GetInstance(enemy, inventory);
+            frmBattle = FrmBattle.GetInstance(enemy);
             frmBattle.Show();
 
             if (enemy == bossKoolaid)
@@ -246,7 +250,7 @@ namespace Fall2020_CSC403_Project
             {
                 inventory.AddItem(gun);
                 picGun.Dispose();
-                gun = null;
+                picGun = null;
             } else if (HitAItem(you, potion))
             {
                 inventory.AddItem(potion);

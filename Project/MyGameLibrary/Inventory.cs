@@ -60,5 +60,22 @@ namespace Fall2020_CSC403_Project.code
             }
             return inventoryString;
         }
+
+        public bool itemHasDurability(Inventory inventory, string attribute)
+        {
+            bool hasDurability = false;
+            foreach (Item item in inventory.GetItems())
+            {
+                if(item.Attribute == attribute)
+                {
+                    if(item.Durability > 0) { 
+                    hasDurability = true;
+                    break;
+                    }
+                }
+            }
+
+            return hasDurability;
+        }
     }
 }
