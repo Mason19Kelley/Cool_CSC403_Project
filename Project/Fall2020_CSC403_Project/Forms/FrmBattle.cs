@@ -14,7 +14,6 @@ namespace Fall2020_CSC403_Project {
     public static FrmBattle instance = null;
     private Enemy enemy;
     private Player player;
-    private Inventory inventory;
     Random atkchoice = new Random();
     private DeathScreen deathScreen;
 
@@ -56,12 +55,11 @@ namespace Fall2020_CSC403_Project {
       tmrFinalBattle.Enabled = true;
     }
 
-    public static FrmBattle GetInstance(Enemy enemy, Inventory inventory) {
+    public static FrmBattle GetInstance(Enemy enemy) {
       if (instance == null) {
         instance = new FrmBattle();
         instance.enemy = enemy;
         instance.Setup();
-        instance.inventory = inventory;
       }
       return instance;
     }
@@ -140,7 +138,7 @@ namespace Fall2020_CSC403_Project {
       }
     }
    private async void btnHeavyAttack_Click(object sender, EventArgs e){
-      if(inventory.ContainsAttribute(inventory, "Heavy")){
+      if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Heavy")){
         lblDamage.Text = "  Dealt 16 damage!";
         btnHeavyAttack.Enabled = false;
         HitDisplay();
@@ -203,7 +201,7 @@ namespace Fall2020_CSC403_Project {
    }
     private void btnHeal_Click(object sender, EventArgs e)
     {
-       if(inventory.ContainsAttribute(inventory, "Healing"))
+       if(FrmLevel.Instance.inventory.ContainsAttribute(FrmLevel.Instance.inventory, "Healing"))
        {
           player.AlterHealth(4);
           UpdateHealthBars();
