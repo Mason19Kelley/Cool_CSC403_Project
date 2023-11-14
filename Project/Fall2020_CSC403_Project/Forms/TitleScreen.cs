@@ -15,7 +15,8 @@ namespace Fall2020_CSC403_Project
     public partial class TitleScreen : Form
     {
         private FontFamily titleFont;
-        private Font titleFontStyle; 
+        private Font titleFontStyle;
+        public static FrmLevel FrmLevelInstance {get; private set;}
 
         public TitleScreen()
         {
@@ -96,9 +97,9 @@ namespace Fall2020_CSC403_Project
         {
             MusicPlayer.StopTitleSound();
             this.Hide();
-            var FrmLevel = new FrmLevel();
-            FrmLevel.Closed += (s, args) => this.Close();
-            FrmLevel.Show();
+            FrmLevelInstance = new FrmLevel();
+            FrmLevelInstance.Closed += (s, args) => this.Close();
+            FrmLevelInstance.Show();
         }
 
         // Leave empty, needed to render the label

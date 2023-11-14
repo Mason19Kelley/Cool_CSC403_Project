@@ -1,9 +1,12 @@
 ﻿using Fall2020_CSC403_Project.code;
+using Fall2020_CSC403_Project.Forms;
 using MyGameLibrary;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Fall2020_CSC403_Project
@@ -12,23 +15,44 @@ namespace Fall2020_CSC403_Project
     {
         private Player player;
 
-        private Enemy enemyPoisonPacket;
-        private Enemy bossKoolaid;
-        private Enemy enemyCheeto;
+        public Enemy enemyPoisonPacket;
+        public Enemy bossKoolaid;
+        public Enemy enemyCheeto;
         private Character[] walls;
 
-        private Item gun;
-        private Inventory inventory;
+        public Item gun;
+        public Item potion;
+        public Inventory inventory;
 
         private DateTime timeBegin;
         private FrmBattle frmBattle;
 
         private FrmInventory frmInventory;
 
+        private Character leftBarrier;
+        private Character rightBarrier;
+        private Character pipeCollider;
+
+        private ConfirmQuit confirmQuit = null;
+
+        private const int MaxInputHistory = 11;
+        private List<string> keylog = new List<string>();
+        private readonly string[] KonamiCode = { "Up", "Up", "Down", "Down", "Left", "Right", "Left", "Right", "B", "A" };
+        private int currentPatternIndex = 0;
+
+
+        private BonusLevel bonusLevel;
+
+        private DeathScreen deathScreen = DeathScreen.Instance;
+
+        public static FrmLevel Instance { get; private set; }
+
+
         public FrmLevel()
         {
             InitializeComponent();
             this.KeyPreview = true;
+            Instance = this;
         }
 
         private void FrmLevel_Load(object sender, EventArgs e)
@@ -36,8 +60,14 @@ namespace Fall2020_CSC403_Project
             const int PADDING = 7;
             const int NUM_WALLS = 13;
 
-            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun");
+            gun = new Item(CreatePosition(picGun), CreateCollider(picGun, PADDING), "Gun", "Heavy");
             gun.Img = picGun.BackgroundImage;
+            gun.Durability = 5;
+            gun.MaxDurability= 5;
+            potion = new Item(CreatePosition(picPotion), CreateCollider(picPotion, PADDING), "Potion", "Healing");
+            potion.Img = picPotion.BackgroundImage;
+            potion.Durability = 2;
+            potion.MaxDurability= 2;
 
             player = new Player(CreatePosition(mainCharacter), CreateCollider(mainCharacter, 0));
             bossKoolaid = new Enemy(CreatePosition(picBossKoolAid), CreateCollider(picBossKoolAid, PADDING));
@@ -51,6 +81,13 @@ namespace Fall2020_CSC403_Project
             bossKoolaid.Color = Color.Red;
             enemyPoisonPacket.Color = Color.Green;
             enemyCheeto.Color = Color.FromArgb(255, 245, 161);
+
+            // set values for enemmies
+            bossKoolaid.BossKoolAidBC();
+            enemyPoisonPacket.PoisonBC();
+            enemyCheeto.CheetoBC();
+            this.createPipeBarrier();
+            pipeCollider = new Character(CreatePosition(pipe), CreatePipeCollider(pipe, 100));
 
             inventory = new Inventory();
 
@@ -67,14 +104,22 @@ namespace Fall2020_CSC403_Project
             timeBegin = DateTime.Now;
         }
 
-        private Vector2 CreatePosition(PictureBox pic)
+        public static Vector2 CreatePosition(PictureBox pic)
         {
             return new Vector2(pic.Location.X, pic.Location.Y);
         }
 
-        private Collider CreateCollider(PictureBox pic, int padding)
+        public static Collider CreateCollider(PictureBox pic, int padding)
         {
             Rectangle rect = new Rectangle(pic.Location, new Size(pic.Size.Width - padding, pic.Size.Height - padding));
+            return new Collider(rect);
+        }
+
+        private Collider CreatePipeCollider(PictureBox pic, int padding)
+        {
+            int x = pic.Left + pic.Width / 2 - (pic.Size.Width - padding) / 2;
+            int y = pic.Top + pic.Height / 2 - (pic.Size.Height - padding) / 2;
+            Rectangle rect = new Rectangle(x, y, pic.Size.Width - padding, pic.Size.Height - padding);
             return new Collider(rect);
         }
 
@@ -106,31 +151,45 @@ namespace Fall2020_CSC403_Project
 
         private void tmrPlayerMove_Tick(object sender, EventArgs e)
         {
-            // move player
-            player.Move();
+            if (deathScreen == null)
+            {
+                // move player
+                player.Move();
 
-            // check collision with walls
-            if (HitAWall(player))
-            {
-                player.MoveBack();
-            }
+                // check collision with walls
+                if (HitAWall(player))
+                {
+                    player.MoveBack();
+                }
 
-            // check collision with enemies
-            if (HitAChar(player, enemyPoisonPacket))
-            {
-                Fight(enemyPoisonPacket);
-            }
-            else if (HitAChar(player, enemyCheeto))
-            {
-                Fight(enemyCheeto);
-            }
-            if (HitAChar(player, bossKoolaid))
-            {
-                Fight(bossKoolaid);
-            }
+                // check collision with enemies
+                if (HitAChar(player, enemyPoisonPacket))
+                {
+                    Fight(enemyPoisonPacket);
+                }
+                else if (HitAChar(player, enemyCheeto))
+                {
+                    Fight(enemyCheeto);
+                }
+                if (HitAChar(player, bossKoolaid))
+                {
+                    Fight(bossKoolaid);
+                }
 
-            // update player's picture box
-            mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+                if (HitAChar(player, leftBarrier) || HitAChar(player, rightBarrier))
+                {
+                    // Handle collision, e.g., prevent the character from moving
+                    player.MoveBack();
+                }
+
+                if (HitAChar(player, pipeCollider))
+                {
+                    openBonusLevel();
+                }
+
+                // update player's picture box
+                mainCharacter.Location = new Point((int)player.Position.x, (int)player.Position.y);
+            }
         }
 
         private bool HitAWall(Character c)
@@ -147,9 +206,14 @@ namespace Fall2020_CSC403_Project
             return hitAWall;
         }
 
-        private bool HitAChar(Character you, Character other)
+        public static bool HitAChar(Character you, Character other)
         {
-            return you.Collider.Intersects(other.Collider);
+            if (other != null)
+            {
+                return you.Collider.Intersects(other.Collider);
+            }
+            else return false;
+            
         }
 
         private bool HitAItem(Character you, Item item) {
@@ -174,6 +238,24 @@ namespace Fall2020_CSC403_Project
             if (enemy == bossKoolaid)
             {
                 frmBattle.SetupForBossBattle();
+            }
+
+
+
+        }
+
+        private void PickUpItem(Character you)
+        {
+            if (HitAItem(you, gun))
+            {
+                inventory.AddItem(gun);
+                picGun.Dispose();
+                picGun = null;
+            } else if (HitAItem(you, potion))
+            {
+                inventory.AddItem(potion);
+                picPotion.Dispose();
+                picPotion = null;
             }
         }
 
@@ -216,12 +298,7 @@ namespace Fall2020_CSC403_Project
                         break;
 
                     case Keys.E:
-                        if(HitAItem(player, gun))
-                        {
-                            inventory.AddItem(gun);
-                            picGun.Dispose();
-                            gun = null;
-                        }
+                        PickUpItem(player);
                     break;
                     
                     case Keys.I:
@@ -245,7 +322,6 @@ namespace Fall2020_CSC403_Project
                         else
                         {
                             this.CloseOverlay();
-                            Console.WriteLine("here");
                         }
                         break;
 
@@ -261,10 +337,10 @@ namespace Fall2020_CSC403_Project
         private void ShowOverlay()
         {
             button1.Location = new Point(520, 137);
-            button2.Location = new Point(520, 243);
-            button3.Location = new Point(520, 349);
-
+            button3.Location = new Point(520, 243);
+            
             panel1.Visible = true;
+            panel1.BringToFront();
             richTextBox1.Visible = false;
         }
 
@@ -282,7 +358,17 @@ namespace Fall2020_CSC403_Project
 
         private void exit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+
+            if (confirmQuit == null || confirmQuit.IsDisposed)
+            {
+                confirmQuit = new ConfirmQuit();
+                confirmQuit.Show();
+
+            }
+            else
+            {
+                confirmQuit.BringToFront();
+            }
         }
 
         private void fullScreen(object sender, EventArgs e)
@@ -310,14 +396,12 @@ namespace Fall2020_CSC403_Project
             if (button1.Location.X > 200)
             {
                 button1.Left -= 400;
-                button2.Left -= 400;
                 button3.Left -= 400;
                 richTextBox1.Visible = true;
             }
             else
             {
                 button1.Left += 400;
-                button2.Left += 400;
                 button3.Left += 400;
                 richTextBox1.Visible = false;
             }
@@ -330,9 +414,20 @@ namespace Fall2020_CSC403_Project
 
         private void FrmLevel_KeyUp(object sender, KeyEventArgs e)
         {
+            Keys key = e.KeyCode;
+            string keyPress = key.ToString();
+
+            RecordInput(keyPress);
+           
+            
+            string temp = "[" + string.Join(", ", keylog) + "]";
+
+            Console.WriteLine(temp);
+
             switch (e.KeyCode)
             {
                 case Keys.Left:
+
                     player.KeysPressed.Remove("left");
                     break;
 
@@ -351,11 +446,86 @@ namespace Fall2020_CSC403_Project
 
         }
 
+        public void RecordInput(string input)
+        {
+            keylog.Add(input);
+            if(keylog.Count > MaxInputHistory)
+            {
+                keylog.RemoveAt(0);
+            }
+            CheckForCheatCode();
+        }
+        private void CheckForCheatCode()
+        {
+            // Compare the recent inputs with the cheat code pattern
+            int startIndex = Math.Max(0, keylog.Count - KonamiCode.Length);
+
+            for (int i = startIndex; i < keylog.Count; i++)
+            {
+                if (keylog[i] == KonamiCode[currentPatternIndex])
+                {
+                    currentPatternIndex++;
+
+                    if (currentPatternIndex == KonamiCode.Length)
+                    {
+                        Console.WriteLine("Cheat code activated!");
+                        pipe.Visible = true;
+                        // Add your cheat code logic here
+                        ResetPattern();
+                        break;
+                    }
+                }
+                else
+                {
+                    ResetPattern();
+                    break;
+                }
+            }
+        }
+
+        private void ResetPattern()
+        {
+            currentPatternIndex = 0;
+        }
 
 
         private void lblInGameTime_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void createPipeBarrier()
+        {
+            PictureBox pic = Controls.Find("barrier", true)[0] as PictureBox;
+            pic.SendToBack();
+            leftBarrier = new Character(CreatePosition(pic), CreateWallCollider(pic, 0, mainCharacter.Size.Height));
+
+            PictureBox pic2 = Controls.Find("barrier2", true)[0] as PictureBox;
+            pic2.SendToBack();
+            rightBarrier = new Character(CreatePosition(pic2), CreateWallCollider(pic2, 0, mainCharacter.Size.Height));
+        }
+
+        private void openBonusLevel()
+        {
+            MusicPlayer.StopLevelMusic();
+            player.ResetMoveSpeed();
+            player.MoveBack();
+            if (bonusLevel == null || bonusLevel.IsDisposed)
+            {
+                bonusLevel = new BonusLevel();
+                bonusLevel.Show();
+
+            }
+            else
+            {
+                bonusLevel.BringToFront();
+            }
+            
+            bonusLevel.StartPosition = FormStartPosition.Manual;
+            bonusLevel.Location = this.Location;
+            bonusLevel.Size = this.Size;
+        }
+
+        
     }
 }

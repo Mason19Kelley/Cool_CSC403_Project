@@ -16,19 +16,42 @@ namespace Fall2020_CSC403_Project
     {
         public static FrmInventory instance = null;
         public static PictureBox[] pictureBoxArray;
+        public static Label[] labelArrayBack;
+        public static Label[] labelArrayFront;
+
 
         public void DisplayInventory(Inventory inventory)
         {
+
+            //Set all durability bars to invisable
+            foreach(Label label in labelArrayBack)
+            {
+                label.Visible= false;
+            }
+            foreach(Label label in labelArrayFront)
+            {
+                label.Visible= false;
+            }
+
             List<Item> items = inventory.GetItems(); // Replace this with your actual method to get items            
+            
+            const int MAX_DURABILITY_WIDTH = 102;
+
 
             for (int i = 0; i < items.Count(); i++)
             {
                 PictureBox slot = pictureBoxArray[11-i];
+                Label backSlot = labelArrayBack[11-i];
+                Label frontSlot = labelArrayFront[11-i];
                 Item item = items[i];
+                float itemDurability = item.Durability / (float)item.MaxDurability;
 
+                backSlot.Visible = true;
+                frontSlot.Visible = true;
+                frontSlot.Width = (int)(MAX_DURABILITY_WIDTH * itemDurability);
                 slot.BackgroundImage = item.Img; 
                 slot.Tag = item.Name.ToString();
-                
+  
             }
         }
 
@@ -42,6 +65,15 @@ namespace Fall2020_CSC403_Project
             // Add all PictureBox controls on the form to the pictureBoxSlots list
             pictureBoxArray = Controls.OfType<PictureBox>()
                 .Where(pictureBox => pictureBox.Name.StartsWith("invSlot"))
+                .ToArray();
+
+            // Add all label controls on the form to the labelSlots list
+            labelArrayBack = Controls.OfType<Label>()
+                .Where(label => label.Name.StartsWith("durb"))
+                .ToArray();
+
+            labelArrayFront = Controls.OfType<Label>()
+                .Where(label => label.Name.StartsWith("durf"))
                 .ToArray();
 
             DisplayInventory(inventory);
@@ -76,7 +108,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot2.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot2.Tag.ToString();
             }
         }
 
@@ -84,7 +116,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot3.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot3.Tag.ToString();
             }
         }
 
@@ -92,7 +124,7 @@ namespace Fall2020_CSC403_Project
         {
             if (invSlot4.Tag != null)
             {
-                nameBox.Text = invSlot1.Tag.ToString();
+                nameBox.Text = invSlot4.Tag.ToString();
             }
         }
 
@@ -158,6 +190,11 @@ namespace Fall2020_CSC403_Project
             {
                 nameBox.Tag = invSlot12.Tag.ToString();
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

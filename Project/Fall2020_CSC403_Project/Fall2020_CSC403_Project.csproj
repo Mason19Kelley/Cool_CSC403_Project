@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DeathScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DeathScreen.Designer.cs">
+      <DependentUpon>DeathScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BonusLevel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BonusLevel.Designer.cs">
+      <DependentUpon>BonusLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConfirmQuit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfirmQuit.Designer.cs">
+      <DependentUpon>ConfirmQuit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +91,15 @@
     <Compile Include="MusicPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BonusLevel.resx">
+      <DependentUpon>BonusLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfirmQuit.resx">
+      <DependentUpon>ConfirmQuit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DeathScreen.resx">
+      <DependentUpon>DeathScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmBattle.resx">
       <DependentUpon>FrmBattle.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,8 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="code\" />
-    <Folder Include="Fonts\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyGameLibrary\MyGameLibrary.csproj">
@@ -148,6 +173,12 @@
   <ItemGroup>
     <Content Include="data\sounds\boss-battle.wav" />
     <Content Include="data\sounds\battle.wav" />
+    <None Include="Resources\questionbox.png" />
+    <None Include="Resources\donald.png" />
+    <None Include="Resources\skull.png" />
+    <None Include="Resources\brick.png" />
+    <None Include="Resources\pipe.png" />
+    <None Include="Resources\pipe.bmp" />
     <None Include="Resources\338817__sirkoto51__rpg-battle-loop-1.wav" />
     <None Include="Resources\352171__sirkoto51__boss-battle-loop-1.wav" />
     <None Include="Resources\365738__matrixxx__game-over-02.wav" />

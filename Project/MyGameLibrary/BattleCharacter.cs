@@ -12,6 +12,7 @@ namespace Fall2020_CSC403_Project.code {
     public int MaxHealth { get; private set; }
     private float strength;
     private float heavystrength;
+    public int special;
 
     public event Action<int> AttackEvent;
 
@@ -28,8 +29,55 @@ namespace Fall2020_CSC403_Project.code {
     public void OnHeavyAttack(int amount){
       AttackEvent((int)(amount * heavystrength));
     }
+
+    //special attacks for the enemies
+    public void CheetoSpecial(int amount) {
+      AttackEvent((int)(amount * 1));
+      AttackEvent((int)(amount * 1));      
+    }
+
+    public void PoisonSpecial(int amount) {
+      AttackEvent((int)(amount * 1.5));
+      AttackEvent((int)(amount * 1.5));
+      AttackEvent((int)(amount * 1.5));
+    }
+
+    public  void KoolAidSpecial(int amount) {
+      AttackEvent((int)(amount * 0.5));
+      AttackEvent((int)(amount * 0.5));
+      AttackEvent((int)(amount * 0.5));
+      AttackEvent((int)(amount * 0.5));
+      AttackEvent((int)(amount * 0.5));
+    }
+
     public void AlterHealth(int amount) {
       Health += amount;
     }
-  }
+
+    public void CheetoBC() {
+      MaxHealth = 15;
+      strength = 2;
+      heavystrength = 3;
+      Health = MaxHealth;
+      special = 1;
+    }
+
+    public void PoisonBC() {
+      MaxHealth = 25;
+      strength = 1;
+      heavystrength = 2;
+      Health = MaxHealth;
+      special = 2;  
+    }
+
+    public void BossKoolAidBC() {
+      MaxHealth = 40;
+      strength = 3;
+      heavystrength = 4;
+      Health = MaxHealth;
+      special = 3;
+    }
+
+
+    }
 }
