@@ -14,6 +14,8 @@ namespace Fall2020_CSC403_Project.code
 
         public string Attribute { get; set; }
 
+        public int Durability { get; set; }
+
         /// <summary>
         /// The Creation of the item.
         /// </summary>
